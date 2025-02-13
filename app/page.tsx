@@ -8,6 +8,8 @@ import { SocialLinks } from '@/components/SocialLinks';
 import { Speakers } from '@/components/Speakers';
 import { Schedule } from '@/components/Schedule';
 import { Sponsors } from '@/components/Sponsors';
+import { CookieBanner } from '@/components/CookieBanner';
+import { IncubitPromo } from '@/components/IncubitPromo';
 
 export default async function Home() {
   const env = await getEnvVars();
@@ -122,6 +124,11 @@ export default async function Home() {
             <SocialLinks env={env} className="mt-8" />
           </div>
         </div>
+        {/* IncubitPromo */}
+        <IncubitPromo />
+        
+        {/* CookieBanner */}
+        <CookieBanner />
       </main>
     </>
   );

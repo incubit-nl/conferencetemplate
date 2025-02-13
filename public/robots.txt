@@ -1,9 +1,14 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /api/*
+Disallow: /_next/*
+Disallow: /static/*
 
 # Host
 Host: https://your-domain.com
 
 # Sitemaps
 Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: undefined/sitemap.xml
+Sitemap: undefined/server-sitemap.xml
