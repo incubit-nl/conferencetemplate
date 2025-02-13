@@ -37,18 +37,32 @@ export async function getEnvVars(): Promise<ParsedEnvVars> {
   let config: EventConfig;
   
   if (isDevelopment) {
-    // For development, try to determine the event from the port or path
-    // You might want to customize this based on your development setup
+    // For development, use default event
     config = defaultEvent;
   } else {
-    // For production, use the hostname to determine the event
-    config = events[hostname] || defaultEvent;
+    // For production, try to match the hostname with events
+    // Remove 'www.' from hostname if present for matching
+    const cleanHostname = hostname.replace(/^www\./, '');
+    config = events[cleanHostname] || defaultEvent;
+    
+    // Log for debugging
+    console.log('Current hostname:', hostname);
+    console.log('Clean hostname:', cleanHostname);
+    console.log('Available events:', Object.keys(events));
+    console.log('Selected config:', config.EVENT_NAME);
   }
 
+  // Parse JSON strings into objects
   return {
     ...config,
-    EVENT_SPEAKERS: JSON.parse(config.EVENT_SPEAKERS),
-    EVENT_SCHEDULE: JSON.parse(config.EVENT_SCHEDULE),
-    EVENT_SPONSORS: JSON.parse(config.EVENT_SPONSORS),
+    EVENT_SPEAKERS: typeof config.EVENT_SPEAKERS === 'string' 
+      ? JSON.parse(config.EVENT_SPEAKERS)
+      : config.EVENT_SPEAKERS,
+    EVENT_SCHEDULE: typeof config.EVENT_SCHEDULE === 'string'
+      ? JSON.parse(config.EVENT_SCHEDULE)
+      : config.EVENT_SCHEDULE,
+    EVENT_SPONSORS: typeof config.EVENT_SPONSORS === 'string'
+      ? JSON.parse(config.EVENT_SPONSORS)
+      : config.EVENT_SPONSORS,
   };
 }
