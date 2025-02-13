@@ -1598,7 +1598,6 @@ export const events: Record<string, EventConfig> = {
         }
       ])
     },
-  
     'https://blockchainweekamsterdam.nl': {
       GA_MEASUREMENT_ID: "G-KEN81FKB6R",
       EVENT_TIMEZONE: "Europe/Amsterdam",
@@ -1663,7 +1662,70 @@ export const events: Record<string, EventConfig> = {
         }
       ])
     },
-  
+    'https://blockchainweek.nl': {
+      GA_MEASUREMENT_ID: "G-KEN81FKB6R",
+      EVENT_TIMEZONE: "Europe/Amsterdam",
+      EVENT_CURRENCY: "EUR",
+      EVENT_LANGUAGE: "English",
+      EVENT_NAME: "Amsterdam Blockchain Week 2025",
+      EVENT_DATE: "2025-06-20",
+      EVENT_LOCATION: "Various Venues, Amsterdam",
+      EVENT_DESCRIPTION: "A week-long exploration of blockchain technology and its applications, featuring conferences, workshops, hackathons, and networking events. Join industry leaders, developers, and entrepreneurs in shaping the future of Web3.",
+      EVENT_SHORT_DESCRIPTION: "Amsterdam's premier blockchain event",
+      EVENT_TICKETS_URL: "https://tickets.blockchainweekamsterdam.nl",
+      EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0",
+      EVENT_TWITTER_HANDLE: "@ABW2025",
+      EVENT_KEYWORDS: "blockchain, cryptocurrency, web3, technology, amsterdam, fintech, defi, nft",
+      EVENT_ORGANIZER: "Amsterdam Blockchain Week Foundation",
+      EVENT_ORGANIZER_URL: "https://blockchainweekamsterdam.nl",
+      SITE_URL: "https://blockchainweekamsterdam.nl",
+      EVENT_START_TIME: "09:00",
+      EVENT_END_TIME: "18:00",
+      EVENT_CAPACITY: "5000",
+      EVENT_PRICE_FROM: "299",
+      EVENT_EMAIL: "info@blockchainweekamsterdam.nl",
+      EVENT_PHONE: "+31 20 555 0456",
+      EVENT_LINKEDIN_URL: "https://linkedin.com/company/amsterdam-blockchain-week",
+      EVENT_TWITTER_URL: "https://twitter.com/ABW2025",
+      EVENT_FACEBOOK_URL: "https://facebook.com/amsterdamblockchainweek",
+      EVENT_SPEAKERS: JSON.stringify([
+        {
+          name: "Blockchain Leaders",
+          title: "Industry Experts",
+          company: "Various Organizations",
+          image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0"
+        }
+      ]),
+      EVENT_SCHEDULE: JSON.stringify([
+        {
+          time: "09:00",
+          title: "Conference Day 1",
+          location: "Beurs van Berlage"
+        },
+        {
+          time: "14:00",
+          title: "Hackathon Kickoff",
+          location: "TQ Amsterdam"
+        },
+        {
+          time: "16:00",
+          title: "Networking Event",
+          location: "Various Venues"
+        }
+      ]),
+      EVENT_SPONSORS: JSON.stringify([
+        {
+          name: "Ethereum Foundation",
+          tier: "platinum",
+          logo: "https://example.com/ethereum-logo.png"
+        },
+        {
+          name: "Dutch Blockchain Coalition",
+          tier: "gold",
+          logo: "https://example.com/dbc-logo.png"
+        }
+      ])
+    },
     'https://amsterdamgrachtenfestival.nl': {
       GA_MEASUREMENT_ID: "G-KEN81FKB6R",
       EVENT_TIMEZONE: "Europe/Amsterdam",

@@ -42,11 +42,11 @@ export function CountdownTimer({ targetDate }: CountdownTimerProps) {
   }, [targetDate]);
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
       {Object.entries(timeLeft).map(([unit, value]) => (
         <div key={unit} className="brutal-border p-4 text-center" style={{ backgroundColor: '#FFD600' }}>
-          <div className="brutal-text text-4xl font-black">{value}</div>
-          <div className="brutal-text text-sm">{unit}</div>
+          <div className="brutal-text text-2xl sm:text-4xl font-black">{value}</div>
+          <div className="brutal-text text-xs sm:text-sm">{unit}</div>
         </div>
       ))}
     </div>
