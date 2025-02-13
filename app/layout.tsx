@@ -5,7 +5,11 @@ import { Analytics } from '@vercel/analytics/react';
 import { getEnvVars } from '@/lib/env';
 import { Toaster } from '@/components/ui/toaster';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap', // Optimize font loading
+  preload: true
+});
 
 export async function generateMetadata(): Promise<Metadata> {
   const env = await getEnvVars();
@@ -38,7 +42,7 @@ export async function generateMetadata(): Promise<Metadata> {
       telephone: false,
     },
     openGraph: {
-      title: title,
+      title,
       description: env.EVENT_DESCRIPTION,
       images: [
         {
@@ -55,7 +59,7 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: title,
+      title,
       description: env.EVENT_SHORT_DESCRIPTION,
       site: env.EVENT_TWITTER_HANDLE,
       creator: '@incubitnl',
@@ -79,6 +83,18 @@ export async function generateMetadata(): Promise<Metadata> {
       google: env.GA_MEASUREMENT_ID,
     },
     category: 'event',
+    applicationName: shortTitle,
+    referrer: 'origin-when-cross-origin',
+    colorScheme: 'dark light',
+    viewport: {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 5,
+    },
+    themeColor: [
+      { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+      { media: '(prefers-color-scheme: dark)', color: '#000000' },
+    ],
   };
 }
 
@@ -90,16 +106,31 @@ export default async function RootLayout({
   const env = await getEnvVars();
   
   return (
-    <html lang={env.EVENT_LANGUAGE.toLowerCase()} className="scroll-smooth">
+    <html 
+      lang={env.EVENT_LANGUAGE.toLowerCase()} 
+      className="scroll-smooth"
+      suppressHydrationWarning
+    >
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link 
+          rel="preconnect" 
+          href="https://fonts.googleapis.com" 
+          crossOrigin="anonymous"
+        />
+        <link 
+          rel="preconnect" 
+          href="https://fonts.gstatic.com" 
+          crossOrigin="anonymous"
+        />
         {env.GA_MEASUREMENT_ID && (
           <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${env.GA_MEASUREMENT_ID}`} />
+            <script 
+              async 
+              src={`https://www.googletagmanager.com/gtag/js?id=${env.GA_MEASUREMENT_ID}`}
+            />
             <script
               dangerouslySetInnerHTML={{
                 __html: `
@@ -108,6 +139,8 @@ export default async function RootLayout({
                   gtag('js', new Date());
                   gtag('config', '${env.GA_MEASUREMENT_ID}', {
                     page_path: window.location.pathname,
+                    anonymize_ip: true,
+                    cookie_flags: 'SameSite=None;Secure'
                   });
                 `,
               }}
@@ -116,14 +149,30 @@ export default async function RootLayout({
         )}
       </head>
       <body className={inter.className}>
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-background"
+        >
+          Skip to main content
+        </a>
+        
         <div className="brutal-border bg-white dark:bg-black p-4 text-center text-sm">
           <strong>Disclaimer:</strong> This is an unofficial event website created by{' '}
-          <a href="https://incubit.nl" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">
+          <a 
+            href="https://incubit.nl" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="underline hover:text-primary"
+          >
             Incubit.nl
           </a>
           . We are not affiliated with the event organizers.
         </div>
-        {children}
+
+        <main id="main-content">
+          {children}
+        </main>
+
         <footer className="fixed bottom-0 w-full bg-background/80 backdrop-blur-sm border-t py-4">
           <div className="container mx-auto text-center">
             <p className="text-sm mb-1">
@@ -142,6 +191,7 @@ export default async function RootLayout({
             </p>
           </div>
         </footer>
+        
         <Toaster />
         <Analytics />
       </body>

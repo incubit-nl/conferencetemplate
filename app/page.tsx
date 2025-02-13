@@ -33,28 +33,46 @@ export default function Home() {
   }, []);
 
   if (!config) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center" role="status">
+        <span className="sr-only">Loading...</span>
+        <div className="animate-spin h-8 w-8 border-4 border-primary border-t-transparent rounded-full"></div>
+      </div>
+    );
   }
+
+  const eventDate = new Date(config.EVENT_DATE);
+  const formattedDate = eventDate.toLocaleDateString('en-NL', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
 
   return (
     <>
       <EventSchema {...config} />
 
-      <main className="min-h-screen pb-24">
+      <div className="min-h-screen pb-24">
         {/* Hero Section */}
-        <div className="relative min-h-[80vh] md:min-h-screen flex items-center justify-center p-4">
+        <section 
+          className="relative min-h-[80vh] md:min-h-screen flex items-center justify-center p-4"
+          aria-labelledby="hero-heading"
+        >
           <div className="absolute inset-0 overflow-hidden">
             <Image
               src={config.EVENT_IMAGE_URL}
-              alt={config.EVENT_NAME}
+              alt={`${config.EVENT_NAME} background`}
               fill
               className="object-cover brightness-50"
               priority
               sizes="100vw"
+              quality={90}
             />
           </div>
           <div className="relative z-10 max-w-4xl mx-auto text-center px-4">
             <h1 
+              id="hero-heading"
               className="brutal-text text-4xl sm:text-6xl md:text-8xl font-black mb-4 md:mb-6 text-white glitch-effect"
               data-text={config.EVENT_NAME}
             >
@@ -69,28 +87,28 @@ export default function Home() {
               className="brutal-button text-base md:text-lg px-6 md:px-8 py-4 md:py-6 w-full sm:w-auto"
               style={{ backgroundColor: '#FFD600', color: '#000' }}
             >
-              <a href={config.EVENT_TICKETS_URL} target="_blank" rel="noopener noreferrer">
-                <Ticket className="mr-2 h-5 w-5 md:h-6 md:w-6" />
+              <a 
+                href={config.EVENT_TICKETS_URL} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                aria-label="Get tickets for the event"
+              >
+                <Ticket className="mr-2 h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
                 Get Your Tickets
               </a>
             </Button>
           </div>
-        </div>
+        </section>
 
         {/* Event Details */}
         <div className="container mx-auto px-4 py-8 md:py-16">
           <div className="grid gap-4 md:gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mb-8 md:mb-16">
             <div className="brutal-border p-4 md:p-6 bg-white dark:bg-black">
               <div className="flex items-center gap-3 md:gap-4">
-                <Calendar className="h-6 w-6 md:h-8 md:w-8" style={{ color: '#FFD600' }} />
+                <Calendar className="h-6 w-6 md:h-8 md:w-8" style={{ color: '#FFD600' }} aria-hidden="true" />
                 <div>
-                  <h3 className="brutal-text font-bold text-sm md:text-base">Date & Time</h3>
-                  <p className="text-sm">{new Date(config.EVENT_DATE).toLocaleDateString('en-NL', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}</p>
+                  <h2 className="brutal-text font-bold text-sm md:text-base">Date & Time</h2>
+                  <p className="text-sm">{formattedDate}</p>
                   <p className="text-sm">{config.EVENT_START_TIME} - {config.EVENT_END_TIME}</p>
                 </div>
               </div>
@@ -98,9 +116,9 @@ export default function Home() {
             
             <div className="brutal-border p-4 md:p-6 bg-white dark:bg-black">
               <div className="flex items-center gap-3 md:gap-4">
-                <MapPin className="h-6 w-6 md:h-8 md:w-8" style={{ color: '#FFD600' }} />
+                <MapPin className="h-6 w-6 md:h-8 md:w-8" style={{ color: '#FFD600' }} aria-hidden="true" />
                 <div>
-                  <h3 className="brutal-text font-bold text-sm md:text-base">Location</h3>
+                  <h2 className="brutal-text font-bold text-sm md:text-base">Location</h2>
                   <p className="text-sm">{config.EVENT_LOCATION}</p>
                 </div>
               </div>
@@ -108,9 +126,9 @@ export default function Home() {
 
             <div className="brutal-border p-4 md:p-6 bg-white dark:bg-black">
               <div className="flex items-center gap-3 md:gap-4">
-                <Users className="h-6 w-6 md:h-8 md:w-8" style={{ color: '#FFD600' }} />
+                <Users className="h-6 w-6 md:h-8 md:w-8" style={{ color: '#FFD600' }} aria-hidden="true" />
                 <div>
-                  <h3 className="brutal-text font-bold text-sm md:text-base">Capacity</h3>
+                  <h2 className="brutal-text font-bold text-sm md:text-base">Capacity</h2>
                   <p className="text-sm">{parseInt(config.EVENT_CAPACITY).toLocaleString()} Attendees</p>
                   <p className="text-xs md:text-sm">
                     {config.EVENT_PRICE_FROM === "0" 
@@ -135,12 +153,20 @@ export default function Home() {
           <div className="brutal-border p-4 md:p-8 bg-white dark:bg-black mt-8 md:mt-16">
             <h2 className="brutal-text text-2xl md:text-3xl font-black mb-4 md:mb-6 text-center">Contact Us</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-              <a href={`mailto:${config.EVENT_EMAIL}`} className="brutal-button p-3 md:p-4 flex items-center justify-center gap-2 text-sm md:text-base">
-                <Mail className="h-5 w-5 md:h-6 md:w-6" />
+              <a 
+                href={`mailto:${config.EVENT_EMAIL}`} 
+                className="brutal-button p-3 md:p-4 flex items-center justify-center gap-2 text-sm md:text-base"
+                aria-label="Email us"
+              >
+                <Mail className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
                 {config.EVENT_EMAIL}
               </a>
-              <a href={`tel:${config.EVENT_PHONE}`} className="brutal-button p-3 md:p-4 flex items-center justify-center gap-2 text-sm md:text-base">
-                <Phone className="h-5 w-5 md:h-6 md:w-6" />
+              <a 
+                href={`tel:${config.EVENT_PHONE}`} 
+                className="brutal-button p-3 md:p-4 flex items-center justify-center gap-2 text-sm md:text-base"
+                aria-label="Call us"
+              >
+                <Phone className="h-5 w-5 md:h-6 md:w-6" aria-hidden="true" />
                 {config.EVENT_PHONE}
               </a>
             </div>
@@ -148,12 +174,9 @@ export default function Home() {
           </div>
         </div>
         
-        {/* IncubitPromo */}
         <IncubitPromo />
-
-        {/* CookieBanner */}
         <CookieBanner />
-      </main>
+      </div>
     </>
   );
 }
