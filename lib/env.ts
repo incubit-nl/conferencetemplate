@@ -27,13 +27,34 @@ export interface ParsedEnvVars extends Omit<EventConfig, 'EVENT_SPEAKERS' | 'EVE
   EVENT_SPONSORS: Sponsor[];
 }
 
+function normalizeUrl(url: string): string {
+  // Remove protocol, www, and trailing slashes
+  return url.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
+}
+
+function findMatchingDomain(hostname: string, domains: string[]): string | undefined {
+  const normalizedHostname = normalizeUrl(hostname);
+  
+  // First try exact match
+  const exactMatch = domains.find(domain => normalizeUrl(domain) === normalizedHostname);
+  if (exactMatch) return exactMatch;
+  
+  // Then try matching without subdomains
+  const hostnameParts = normalizedHostname.split('.');
+  const baseDomain = hostnameParts.slice(-2).join('.');
+  
+  return domains.find(domain => {
+    const normalizedDomain = normalizeUrl(domain);
+    return normalizedDomain.endsWith(baseDomain);
+  });
+}
+
 export async function getEnvVars(): Promise<ParsedEnvVars> {
   let hostname = '';
   let protocol = '';
   
   if (typeof window !== 'undefined') {
     try {
-      // Get the current domain without 'www.' prefix if present
       hostname = window.location.hostname.replace('www.', '');
       protocol = window.location.protocol;
       
@@ -60,23 +81,26 @@ export async function getEnvVars(): Promise<ParsedEnvVars> {
     logger.info('Development environment detected, using default configuration');
     config = defaultEvent;
   } else {
+    const availableDomains = Object.keys(events);
+    
     logger.info('Domain Information:', {
       hostname,
-      availableDomains: Object.keys(events),
+      availableDomains,
       hasConfiguration: events.hasOwnProperty(hostname)
     });
 
     // Try to find matching configuration
-    config = events[hostname];
+    const matchingDomain = findMatchingDomain(hostname, availableDomains);
     
-    if (!config) {
-      logger.warn(`No configuration found for ${hostname}, using default configuration`);
-      config = defaultEvent;
-    } else {
-      logger.info(`Found configuration for ${hostname}:`, {
+    if (matchingDomain) {
+      config = events[matchingDomain];
+      logger.info(`Found configuration for ${hostname} using ${matchingDomain}:`, {
         eventName: config.EVENT_NAME,
         url: `${protocol}//${hostname}`
       });
+    } else {
+      logger.warn(`No configuration found for ${hostname}, using default configuration`);
+      config = defaultEvent;
     }
   }
 
