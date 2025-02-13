@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import Link from 'next/link';
 
 export function CookieBanner() {
   const [showBanner, setShowBanner] = useState(false);
@@ -35,8 +36,11 @@ export function CookieBanner() {
             <h3 className="brutal-text text-lg font-bold">🍪 Cookie Preferences</h3>
             <p className="text-sm text-muted-foreground">
               We use cookies to enhance your experience and analyze our website traffic. 
-              By clicking "Accept", you consent to our use of cookies. Learn more about how we use cookies in our{' '}
-              <a href="/privacy" className="underline hover:text-primary">Privacy Policy</a>.
+              By clicking &quot;Accept&quot;, you consent to our use of cookies. Learn more about how we use cookies in our{' '}
+              <Link href="/privacy" className="underline hover:text-primary">
+                Privacy Policy
+              </Link>
+              .
             </p>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">

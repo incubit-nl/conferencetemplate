@@ -116,6 +116,13 @@ export default async function RootLayout({
         )}
       </head>
       <body className={inter.className}>
+        <div className="brutal-border bg-white dark:bg-black p-4 text-center text-sm">
+          <strong>Disclaimer:</strong> This is an unofficial event website created by{' '}
+          <a href="https://incubit.nl" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">
+            Incubit.nl
+          </a>
+          . We are not affiliated with the event organizers.
+        </div>
         {children}
         <footer className="fixed bottom-0 w-full bg-background/80 backdrop-blur-sm border-t py-4">
           <div className="container mx-auto text-center">
