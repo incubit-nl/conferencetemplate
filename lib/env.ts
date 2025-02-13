@@ -1,4 +1,5 @@
 import { events, defaultEvent, EventConfig } from './events';
+import { logger } from './logger';
 
 export interface Speaker {
   name: string;
@@ -27,33 +28,60 @@ export interface ParsedEnvVars extends Omit<EventConfig, 'EVENT_SPEAKERS' | 'EVE
 }
 
 export async function getEnvVars(): Promise<ParsedEnvVars> {
-  // Get the current hostname
-  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  let hostname = '';
+  let protocol = '';
   
+  if (typeof window !== 'undefined') {
+    try {
+      // Get the current domain without 'www.' prefix if present
+      hostname = window.location.hostname.replace('www.', '');
+      protocol = window.location.protocol;
+      
+      logger.info('URL Information:', {
+        fullUrl: window.location.href,
+        protocol,
+        hostname,
+        rawHostname: window.location.hostname
+      });
+    } catch (error) {
+      logger.error('Error getting hostname:', error);
+    }
+  }
+
   // For development environment, handle localhost
-  const isDevelopment = hostname === 'localhost' || hostname === '127.0.0.1';
-  
+  const isDevelopment = hostname === 'localhost' || 
+                       hostname === '127.0.0.1' || 
+                       hostname === '';
+
   // Get the configuration based on hostname or use default
   let config: EventConfig;
   
   if (isDevelopment) {
-    // For development, use default event
+    logger.info('Development environment detected, using default configuration');
     config = defaultEvent;
   } else {
-    // For production, try to match the hostname with events
-    // Remove 'www.' from hostname if present for matching
-    const cleanHostname = hostname.replace(/^www\./, '');
-    config = events[cleanHostname] || defaultEvent;
+    logger.info('Domain Information:', {
+      hostname,
+      availableDomains: Object.keys(events),
+      hasConfiguration: events.hasOwnProperty(hostname)
+    });
+
+    // Try to find matching configuration
+    config = events[hostname];
     
-    // Log for debugging
-    console.log('Current hostname:', hostname);
-    console.log('Clean hostname:', cleanHostname);
-    console.log('Available events:', Object.keys(events));
-    console.log('Selected config:', config.EVENT_NAME);
+    if (!config) {
+      logger.warn(`No configuration found for ${hostname}, using default configuration`);
+      config = defaultEvent;
+    } else {
+      logger.info(`Found configuration for ${hostname}:`, {
+        eventName: config.EVENT_NAME,
+        url: `${protocol}//${hostname}`
+      });
+    }
   }
 
   // Parse JSON strings into objects
-  return {
+  const parsedConfig = {
     ...config,
     EVENT_SPEAKERS: typeof config.EVENT_SPEAKERS === 'string' 
       ? JSON.parse(config.EVENT_SPEAKERS)
@@ -65,4 +93,12 @@ export async function getEnvVars(): Promise<ParsedEnvVars> {
       ? JSON.parse(config.EVENT_SPONSORS)
       : config.EVENT_SPONSORS,
   };
+
+  logger.info('Final configuration:', {
+    eventName: parsedConfig.EVENT_NAME,
+    hostname,
+    isDevelopment
+  });
+
+  return parsedConfig;
 }

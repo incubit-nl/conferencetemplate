@@ -1599,7 +1599,7 @@ export const events: Record<string, EventConfig> = {
       ])
     },
   
-    'blockchainweekamsterdam.nl': {
+    'https://blockchainweekamsterdam.nl': {
       GA_MEASUREMENT_ID: "G-KEN81FKB6R",
       EVENT_TIMEZONE: "Europe/Amsterdam",
       EVENT_CURRENCY: "EUR",
@@ -1664,7 +1664,7 @@ export const events: Record<string, EventConfig> = {
       ])
     },
   
-    'amsterdamgrachtenfestival.nl': {
+    'https://amsterdamgrachtenfestival.nl': {
       GA_MEASUREMENT_ID: "G-KEN81FKB6R",
       EVENT_TIMEZONE: "Europe/Amsterdam",
       EVENT_CURRENCY: "EUR",
