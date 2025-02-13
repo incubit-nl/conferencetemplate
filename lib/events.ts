@@ -1729,7 +1729,7 @@ export const events: Record<string, EventConfig> = {
       ])
     },
   
-    'amsterdamartweek.nl': {
+    'https://amsterdamartweek.nl': {
       GA_MEASUREMENT_ID: "G-KEN81FKB6R",
       EVENT_TIMEZONE: "Europe/Amsterdam",
       EVENT_CURRENCY: "EUR",
