@@ -10,11 +10,19 @@ const inter = Inter({ subsets: ['latin'] });
 export async function generateMetadata(): Promise<Metadata> {
   const env = await getEnvVars();
   
+  // Create a clean title without the year
+  const baseTitle = env.EVENT_NAME.replace(/\s*\d{4}$/, '');
+  const year = new Date(env.EVENT_DATE).getFullYear();
+  
+  // Construct SEO-friendly title variations
+  const title = `${baseTitle} ${year}`;
+  const shortTitle = baseTitle;
+  
   return {
     metadataBase: new URL(env.SITE_URL),
     title: {
-      default: env.EVENT_NAME,
-      template: `%s | ${env.EVENT_NAME}`,
+      default: title,
+      template: `%s | ${shortTitle}`,
     },
     description: env.EVENT_DESCRIPTION,
     keywords: env.EVENT_KEYWORDS.split(',').map(k => k.trim()),
@@ -30,28 +38,28 @@ export async function generateMetadata(): Promise<Metadata> {
       telephone: false,
     },
     openGraph: {
-      title: env.EVENT_NAME,
+      title: title,
       description: env.EVENT_DESCRIPTION,
       images: [
         {
-          url: '/opengraph-image.png',
+          url: env.EVENT_IMAGE_URL,
           width: 1200,
           height: 630,
-          alt: env.EVENT_NAME,
+          alt: title,
         },
       ],
       url: env.SITE_URL,
-      siteName: env.EVENT_NAME,
-      locale: 'en_US',
+      siteName: title,
+      locale: env.EVENT_LANGUAGE.toLowerCase(),
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: env.EVENT_NAME,
+      title: title,
       description: env.EVENT_SHORT_DESCRIPTION,
       site: env.EVENT_TWITTER_HANDLE,
       creator: '@incubitnl',
-      images: ['/opengraph-image.png'],
+      images: [env.EVENT_IMAGE_URL],
     },
     alternates: {
       canonical: env.SITE_URL,
@@ -70,7 +78,7 @@ export async function generateMetadata(): Promise<Metadata> {
     verification: {
       google: env.GA_MEASUREMENT_ID,
     },
-    category: 'technology',
+    category: 'event',
   };
 }
 
