@@ -223,5 +223,3 @@ export const events: Record<string, EventConfig> = {
 
 // Default event configuration (fallback)
 export const defaultEvent = events['ade2025.nl'];
-
-export { defaultEvent }
