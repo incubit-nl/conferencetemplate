@@ -45,10 +45,11 @@ export default async function Home() {
               size="lg"
               asChild
               className="brutal-button text-lg px-8 py-6"
+              style={{ backgroundColor: '#FFD600', color: '#000' }}
             >
               <a href={env.EVENT_TICKETS_URL} target="_blank" rel="noopener noreferrer">
-                <Ticket className="mr-2 h-6 w-6" />
-                Get Your Tickets
+              <Ticket className="mr-2 h-6 w-6" />
+              Get Your Tickets
               </a>
             </Button>
           </div>
@@ -59,7 +60,7 @@ export default async function Home() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 mb-16">
             <div className="brutal-border p-6 bg-white dark:bg-black">
               <div className="flex items-center gap-4">
-                <Calendar className="h-8 w-8" />
+                <Calendar className="h-8 w-8" style={{ color: '#FFD600' }} />
                 <div>
                   <h3 className="brutal-text font-bold">Date & Time</h3>
                   <p>{new Date(env.EVENT_DATE).toLocaleDateString('en-NL', {
@@ -74,18 +75,18 @@ export default async function Home() {
             </div>
             
             <div className="brutal-border p-6 bg-white dark:bg-black">
-              <div className="flex items-center gap-4">
-                <MapPin className="h-8 w-8" />
+                <div className="flex items-center gap-4">
+                <MapPin className="h-8 w-8" style={{ color: '#FFD600' }} />
                 <div>
                   <h3 className="brutal-text font-bold">Location</h3>
                   <p>{env.EVENT_LOCATION}</p>
                 </div>
-              </div>
+                </div>
             </div>
 
             <div className="brutal-border p-6 bg-white dark:bg-black">
               <div className="flex items-center gap-4">
-                <Users className="h-8 w-8" />
+                <Users className="h-8 w-8" style={{ color: '#FFD600' }} />
                 <div>
                   <h3 className="brutal-text font-bold">Capacity</h3>
                   <p>{parseInt(env.EVENT_CAPACITY).toLocaleString()} Attendees</p>
@@ -126,7 +127,7 @@ export default async function Home() {
         </div>
         {/* IncubitPromo */}
         <IncubitPromo />
-        
+
         {/* CookieBanner */}
         <CookieBanner />
       </main>

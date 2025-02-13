@@ -17,7 +17,7 @@ export function SocialLinks({ env, className = '' }: SocialLinksProps) {
         rel="noopener noreferrer"
         className="brutal-button p-3"
       >
-        <Linkedin className="h-6 w-6" />
+        <Linkedin className="h-6 w-6 text-[#FFD600]" />
       </a>
       <a
         href={env.EVENT_TWITTER_URL}
@@ -25,7 +25,7 @@ export function SocialLinks({ env, className = '' }: SocialLinksProps) {
         rel="noopener noreferrer"
         className="brutal-button p-3"
       >
-        <Twitter className="h-6 w-6" />
+        <Twitter className="h-6 w-6 text-[#FFD600]" />
       </a>
       <a
         href={env.EVENT_FACEBOOK_URL}
@@ -33,7 +33,7 @@ export function SocialLinks({ env, className = '' }: SocialLinksProps) {
         rel="noopener noreferrer"
         className="brutal-button p-3"
       >
-        <Facebook className="h-6 w-6" />
+        <Facebook className="h-6 w-6 text-[#FFD600]" />
       </a>
     </div>
   );
