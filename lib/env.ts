@@ -27,9 +27,23 @@ export interface ParsedEnvVars extends Omit<EventConfig, 'EVENT_SPEAKERS' | 'EVE
 }
 
 export async function getEnvVars(): Promise<ParsedEnvVars> {
-  // For static exports, we'll use the default event
-  // In a real-world scenario, you would determine the event based on the build-time environment
-  const config = defaultEvent;
+  // Get the current hostname
+  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+  
+  // For development environment, handle localhost
+  const isDevelopment = hostname === 'localhost' || hostname === '127.0.0.1';
+  
+  // Get the configuration based on hostname or use default
+  let config: EventConfig;
+  
+  if (isDevelopment) {
+    // For development, try to determine the event from the port or path
+    // You might want to customize this based on your development setup
+    config = defaultEvent;
+  } else {
+    // For production, use the hostname to determine the event
+    config = events[hostname] || defaultEvent;
+  }
 
   return {
     ...config,
