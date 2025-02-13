@@ -7,7 +7,6 @@ import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
-// This is a dynamic metadata function that will be called for each request
 export async function generateMetadata(): Promise<Metadata> {
   const env = await getEnvVars();
   
@@ -15,7 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
     metadataBase: new URL(env.SITE_URL),
     title: {
       default: env.EVENT_NAME,
-      template: `%s | ${env.EVENT_NAME}`
+      template: `%s | ${env.EVENT_NAME}`,
     },
     description: env.EVENT_DESCRIPTION,
     keywords: env.EVENT_KEYWORDS.split(',').map(k => k.trim()),
@@ -33,7 +32,14 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: env.EVENT_NAME,
       description: env.EVENT_DESCRIPTION,
-      images: [env.EVENT_IMAGE_URL],
+      images: [
+        {
+          url: '/opengraph-image.png',
+          width: 1200,
+          height: 630,
+          alt: env.EVENT_NAME,
+        },
+      ],
       url: env.SITE_URL,
       siteName: env.EVENT_NAME,
       locale: 'en_US',
@@ -45,7 +51,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: env.EVENT_SHORT_DESCRIPTION,
       site: env.EVENT_TWITTER_HANDLE,
       creator: '@incubitnl',
-      images: [env.EVENT_IMAGE_URL],
+      images: ['/opengraph-image.png'],
     },
     alternates: {
       canonical: env.SITE_URL,
@@ -61,6 +67,10 @@ export async function generateMetadata(): Promise<Metadata> {
         'max-snippet': -1,
       },
     },
+    verification: {
+      google: env.GA_MEASUREMENT_ID,
+    },
+    category: 'technology',
   };
 }
 
@@ -75,6 +85,7 @@ export default async function RootLayout({
     <html lang={env.EVENT_LANGUAGE.toLowerCase()} className="scroll-smooth">
       <head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -87,7 +98,9 @@ export default async function RootLayout({
                   window.dataLayer = window.dataLayer || [];
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
-                  gtag('config', '${env.GA_MEASUREMENT_ID}');
+                  gtag('config', '${env.GA_MEASUREMENT_ID}', {
+                    page_path: window.location.pathname,
+                  });
                 `,
               }}
             />
@@ -101,12 +114,12 @@ export default async function RootLayout({
             <p className="text-sm mb-1">
               Website crafted by{' '}
               <a
-          href="https://incubit.nl"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-bold hover:underline"
+                href="https://incubit.nl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold hover:underline"
               >
-          Incubit.nl
+                Incubit.nl
               </a>
             </p>
             <p className="text-xs text-muted-foreground">

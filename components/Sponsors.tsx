@@ -1,6 +1,5 @@
 "use client";
 
-import Image from 'next/image';
 import { Sponsor } from '@/lib/env';
 
 interface SponsorsProps {
@@ -14,14 +13,9 @@ export function Sponsors({ sponsors }: SponsorsProps) {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
         {sponsors.map((sponsor) => (
           <div key={sponsor.name} className="brutal-border p-4 bg-secondary flex items-center justify-center">
-            <div className="relative w-full aspect-[3/2]">
-              <Image
-                src={sponsor.logo}
-                alt={sponsor.name}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 50vw, 33vw"
-              />
+            <div className="text-center">
+              <h3 className="brutal-text text-lg font-bold">{sponsor.name}</h3>
+              <p className="text-sm text-muted-foreground capitalize">{sponsor.tier} Sponsor</p>
             </div>
           </div>
         ))}
