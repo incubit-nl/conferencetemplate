@@ -1,3 +1,6 @@
+import { headers } from 'next/headers';
+import { events, defaultEvent, EventConfig } from './events';
+
 const requiredEnvVars = [
   'EVENT_NAME',
   'EVENT_DATE',
@@ -29,55 +32,45 @@ const requiredEnvVars = [
   'EVENT_SPONSORS'
 ] as const;
 
-type EnvVars = Record<(typeof requiredEnvVars)[number], string>;
-
-interface Speaker {
+export interface Speaker {
   name: string;
   title: string;
   company: string;
   image: string;
 }
 
-interface ScheduleItem {
+export interface ScheduleItem {
   time: string;
   title: string;
   speaker?: string;
   location: string;
 }
 
-interface Sponsor {
+export interface Sponsor {
   name: string;
   tier: 'platinum' | 'gold' | 'silver';
   logo: string;
 }
 
-export interface ParsedEnvVars extends Omit<EnvVars, 'EVENT_SPEAKERS' | 'EVENT_SCHEDULE' | 'EVENT_SPONSORS'> {
+export interface ParsedEnvVars extends Omit<EventConfig, 'EVENT_SPEAKERS' | 'EVENT_SCHEDULE' | 'EVENT_SPONSORS'> {
   EVENT_SPEAKERS: Speaker[];
   EVENT_SCHEDULE: ScheduleItem[];
   EVENT_SPONSORS: Sponsor[];
 }
 
-export function getEnvVars(): ParsedEnvVars {
-  const missingVars = requiredEnvVars.filter((key) => !process.env[key]);
-  
-  if (missingVars.length > 0) {
-    throw new Error(
-      `Missing required environment variables: ${missingVars.join(', ')}`
-    );
-  }
+export async function getEnvVars(): Promise<ParsedEnvVars> {
+  // Get the host from the request headers
+  const headersList = headers();
+  const host = (await headersList).get('host') || '';
+  const domain = host.replace(/^www\./, '');
 
-  const rawEnvVars = requiredEnvVars.reduce(
-    (acc, key) => ({
-      ...acc,
-      [key]: process.env[key]!,
-    }),
-    {} as EnvVars
-  );
+  // Get the configuration for the current domain
+  const config = events[domain] || defaultEvent;
 
   return {
-    ...rawEnvVars,
-    EVENT_SPEAKERS: JSON.parse(rawEnvVars.EVENT_SPEAKERS),
-    EVENT_SCHEDULE: JSON.parse(rawEnvVars.EVENT_SCHEDULE),
-    EVENT_SPONSORS: JSON.parse(rawEnvVars.EVENT_SPONSORS),
+    ...config,
+    EVENT_SPEAKERS: JSON.parse(config.EVENT_SPEAKERS),
+    EVENT_SCHEDULE: JSON.parse(config.EVENT_SCHEDULE),
+    EVENT_SPONSORS: JSON.parse(config.EVENT_SPONSORS),
   };
 }
