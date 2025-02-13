@@ -35,7 +35,7 @@ const eventSchema = z.object({
 export type EventConfig = z.infer<typeof eventSchema>;
 
 const commonConfig = {
-  GA_MEASUREMENT_ID: "G-KEN81FKB6R", // Same GA code for all sites
+  GA_MEASUREMENT_ID: "G-KEN81FKB6R",
   EVENT_TIMEZONE: "Europe/Amsterdam",
   EVENT_CURRENCY: "EUR",
   EVENT_LANGUAGE: "English",
@@ -48,12 +48,12 @@ export const events: Record<string, EventConfig> = {
     EVENT_NAME: "Amsterdam Dance Event 2025",
     EVENT_DATE: "2025-10-15",
     EVENT_LOCATION: "Various Locations, Amsterdam",
-    EVENT_DESCRIPTION: "The world's leading electronic music conference and festival, featuring over 2500 artists and 600 speakers in 200 locations.",
+    EVENT_DESCRIPTION: "The world's leading electronic music conference and festival, featuring over 2500 artists and 600 speakers across 200 locations. Experience cutting-edge music, technology, and industry insights in the heart of Amsterdam.",
     EVENT_SHORT_DESCRIPTION: "World's biggest electronic music conference & festival",
     EVENT_TICKETS_URL: "https://tickets.ade2025.nl",
     EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745",
     EVENT_TWITTER_HANDLE: "@ADE_NL",
-    EVENT_KEYWORDS: "amsterdam dance event, electronic music, conference, festival, ADE, dance music, netherlands",
+    EVENT_KEYWORDS: "amsterdam dance event, electronic music, conference, festival, ADE, dance music, netherlands, techno, house music, music industry",
     EVENT_ORGANIZER: "Amsterdam Dance Event Foundation",
     EVENT_ORGANIZER_URL: "https://ade2025.nl",
     SITE_URL: "https://ade2025.nl",
@@ -69,26 +69,63 @@ export const events: Record<string, EventConfig> = {
     EVENT_SPEAKERS: JSON.stringify([
       {
         name: "Martin Garrix",
-        title: "Headlining Artist",
+        title: "Headlining Artist & Label Owner",
         company: "STMPD RCRDS",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
       },
       {
         name: "Nina Kraviz",
-        title: "Techno Pioneer",
+        title: "Techno Pioneer & Label Owner",
         company: "трип",
         image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+      },
+      {
+        name: "David Guetta",
+        title: "Grammy Award-Winning Producer",
+        company: "What A Music",
+        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d"
+      },
+      {
+        name: "Charlotte de Witte",
+        title: "Techno Artist & Label Owner",
+        company: "KNTXT",
+        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb"
       }
     ]),
     EVENT_SCHEDULE: JSON.stringify([
       {
         time: "10:00",
-        title: "Conference Opening",
+        title: "Conference Opening Keynote",
+        speaker: "Martin Garrix",
         location: "DeLaMar Theater"
       },
       {
+        time: "11:30",
+        title: "Future of Electronic Music Panel",
+        speaker: "Industry Leaders Panel",
+        location: "RAI Amsterdam"
+      },
+      {
+        time: "14:00",
+        title: "Music Production Masterclass",
+        speaker: "David Guetta",
+        location: "Studio 80"
+      },
+      {
+        time: "16:00",
+        title: "Label Management Workshop",
+        speaker: "Charlotte de Witte",
+        location: "Felix Meritis"
+      },
+      {
+        time: "20:00",
+        title: "ADE Opening Party",
+        speaker: "Multiple Artists",
+        location: "Ziggo Dome"
+      },
+      {
         time: "22:00",
-        title: "Night Program Starts",
+        title: "Night Program Begins",
         location: "Various Venues"
       }
     ]),
@@ -100,8 +137,23 @@ export const events: Record<string, EventConfig> = {
       },
       {
         name: "Pioneer DJ",
-        tier: "gold",
+        tier: "platinum",
         logo: "https://example.com/pioneer-logo.png"
+      },
+      {
+        name: "Native Instruments",
+        tier: "gold",
+        logo: "https://example.com/ni-logo.png"
+      },
+      {
+        name: "Ableton",
+        tier: "gold",
+        logo: "https://example.com/ableton-logo.png"
+      },
+      {
+        name: "Red Bull",
+        tier: "silver",
+        logo: "https://example.com/redbull-logo.png"
       }
     ])
   },
@@ -110,12 +162,12 @@ export const events: Record<string, EventConfig> = {
     EVENT_NAME: "Awakenings Festival 2025",
     EVENT_DATE: "2025-06-28",
     EVENT_LOCATION: "Spaarnwoude Resort, Amsterdam",
-    EVENT_DESCRIPTION: "The world's largest techno festival returns to Amsterdam for another groundbreaking edition featuring the best techno DJs and producers.",
+    EVENT_DESCRIPTION: "Experience the world's largest outdoor techno festival with 8 stages, featuring over 100 artists across two days. Immerse yourself in cutting-edge sound systems, spectacular production, and the best techno music on the planet.",
     EVENT_SHORT_DESCRIPTION: "World's premier techno festival",
     EVENT_TICKETS_URL: "https://tickets.awakenings2025.nl",
     EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7",
     EVENT_TWITTER_HANDLE: "@awakenings",
-    EVENT_KEYWORDS: "techno, festival, electronic music, amsterdam, dance, awakenings, underground music",
+    EVENT_KEYWORDS: "techno, festival, electronic music, amsterdam, dance, awakenings, underground music, techno festival, netherlands festival",
     EVENT_ORGANIZER: "Awakenings Events",
     EVENT_ORGANIZER_URL: "https://awakenings.nl",
     SITE_URL: "https://awakenings2025.nl",
@@ -131,27 +183,60 @@ export const events: Record<string, EventConfig> = {
     EVENT_SPEAKERS: JSON.stringify([
       {
         name: "Adam Beyer",
-        title: "Headlining Artist",
+        title: "Headlining Artist & Drumcode Founder",
         company: "Drumcode",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
       },
       {
         name: "Charlotte de Witte",
-        title: "Headlining Artist",
+        title: "Headlining Artist & KNTXT Founder",
         company: "KNTXT",
         image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+      },
+      {
+        name: "Amelie Lens",
+        title: "Headlining Artist & Label Owner",
+        company: "Exhale",
+        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb"
+      },
+      {
+        name: "Joseph Capriati",
+        title: "Headlining Artist",
+        company: "Redimension",
+        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d"
       }
     ]),
     EVENT_SCHEDULE: JSON.stringify([
       {
         time: "12:00",
-        title: "Gates Open",
+        title: "Festival Gates Open",
         location: "Main Entrance"
       },
       {
-        time: "14:00",
-        title: "First Acts Begin",
-        location: "All Stages"
+        time: "13:00",
+        title: "Opening Ceremony",
+        speaker: "Resident DJs",
+        location: "Main Stage"
+      },
+      {
+        time: "15:00",
+        title: "Joseph Capriati",
+        location: "Area V"
+      },
+      {
+        time: "17:00",
+        title: "Amelie Lens",
+        location: "Area X"
+      },
+      {
+        time: "19:00",
+        title: "Charlotte de Witte",
+        location: "Main Stage"
+      },
+      {
+        time: "21:00",
+        title: "Adam Beyer Closing Set",
+        location: "Main Stage"
       }
     ]),
     EVENT_SPONSORS: JSON.stringify([
@@ -162,8 +247,18 @@ export const events: Record<string, EventConfig> = {
       },
       {
         name: "Heineken",
-        tier: "gold",
+        tier: "platinum",
         logo: "https://example.com/heineken-logo.png"
+      },
+      {
+        name: "d&b audiotechnik",
+        tier: "gold",
+        logo: "https://example.com/db-logo.png"
+      },
+      {
+        name: "Red Bull",
+        tier: "gold",
+        logo: "https://example.com/redbull-logo.png"
       }
     ])
   },
@@ -172,12 +267,12 @@ export const events: Record<string, EventConfig> = {
     EVENT_NAME: "Bevrijdingsdag Festival 2025",
     EVENT_DATE: "2025-05-05",
     EVENT_LOCATION: "Multiple Cities, Netherlands",
-    EVENT_DESCRIPTION: "Celebrate Dutch liberation with nationwide festivals, music, and cultural events commemorating freedom and democracy.",
+    EVENT_DESCRIPTION: "Join the Netherlands' largest freedom celebration with 14 major festivals across the country. Experience live music, cultural performances, and meaningful discussions about freedom, democracy, and peace. A day of reflection, celebration, and unity.",
     EVENT_SHORT_DESCRIPTION: "Netherlands' freedom celebration festivals",
     EVENT_TICKETS_URL: "https://tickets.bevrijdingsdag2025.nl",
     EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3",
     EVENT_TWITTER_HANDLE: "@bevrijdingsdag",
-    EVENT_KEYWORDS: "bevrijdingsdag, liberation day, netherlands, festival, freedom, celebration, dutch culture",
+    EVENT_KEYWORDS: "bevrijdingsdag, liberation day, netherlands, festival, freedom, celebration, dutch culture, peace festival, may 5th",
     EVENT_ORGANIZER: "Nationaal Comité 4 en 5 mei",
     EVENT_ORGANIZER_URL: "https://www.4en5mei.nl",
     SITE_URL: "https://bevrijdingsdag2025.nl",
@@ -192,22 +287,63 @@ export const events: Record<string, EventConfig> = {
     EVENT_FACEBOOK_URL: "https://facebook.com/4en5mei",
     EVENT_SPEAKERS: JSON.stringify([
       {
-        name: "Prime Minister",
-        title: "Opening Speaker",
-        company: "Dutch Government",
+        name: "Mark Rutte",
+        title: "Prime Minister",
+        company: "Government of the Netherlands",
         image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+      },
+      {
+        name: "Ambassadors of Freedom",
+        title: "Musical Ambassadors",
+        company: "Dutch Music Industry",
+        image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+      },
+      {
+        name: "Veterans Association",
+        title: "Honorary Guests",
+        company: "Dutch Veterans Platform",
+        image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d"
+      },
+      {
+        name: "Freedom Lecture Speaker",
+        title: "Distinguished Scholar",
+        company: "International Peace Institute",
+        image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb"
       }
     ]),
     EVENT_SCHEDULE: JSON.stringify([
       {
-        time: "12:00",
-        title: "Opening Ceremony",
+        time: "09:00",
+        title: "National Commemoration",
+        speaker: "Prime Minister",
         location: "Dam Square, Amsterdam"
       },
       {
+        time: "12:00",
+        title: "Opening Ceremonies",
+        location: "14 Festival Cities"
+      },
+      {
         time: "13:00",
-        title: "Freedom Festivals Begin",
-        location: "Multiple Cities"
+        title: "Freedom Lectures",
+        speaker: "Various Speakers",
+        location: "Multiple Venues"
+      },
+      {
+        time: "15:00",
+        title: "Ambassadors of Freedom Performances",
+        location: "Main Stages"
+      },
+      {
+        time: "17:00",
+        title: "Veterans' Stories",
+        speaker: "Veterans Association",
+        location: "Discussion Tents"
+      },
+      {
+        time: "20:00",
+        title: "Evening Concerts",
+        location: "All Festival Locations"
       }
     ]),
     EVENT_SPONSORS: JSON.stringify([
@@ -215,10 +351,29 @@ export const events: Record<string, EventConfig> = {
         name: "vfonds",
         tier: "platinum",
         logo: "https://example.com/vfonds-logo.png"
+      },
+      {
+        name: "Dutch Government",
+        tier: "platinum",
+        logo: "https://example.com/govt-logo.png"
+      },
+      {
+        name: "European Union",
+        tier: "gold",
+        logo: "https://example.com/eu-logo.png"
+      },
+      {
+        name: "Netherlands Ministry of Defense",
+        tier: "gold",
+        logo: "https://example.com/defense-logo.png"
+      },
+      {
+        name: "Dutch National Railway",
+        tier: "silver",
+        logo: "https://example.com/ns-logo.png"
       }
     ])
-  },
-  // Continue with more events...
+  }
 };
 
 // Default event configuration (fallback)

@@ -1,36 +1,4 @@
-import { headers } from 'next/headers';
 import { events, defaultEvent, EventConfig } from './events';
-
-const requiredEnvVars = [
-  'EVENT_NAME',
-  'EVENT_DATE',
-  'EVENT_LOCATION',
-  'EVENT_DESCRIPTION',
-  'EVENT_SHORT_DESCRIPTION',
-  'EVENT_TICKETS_URL',
-  'EVENT_IMAGE_URL',
-  'EVENT_TWITTER_HANDLE',
-  'EVENT_KEYWORDS',
-  'EVENT_ORGANIZER',
-  'EVENT_ORGANIZER_URL',
-  'SITE_URL',
-  'GA_MEASUREMENT_ID',
-  'EVENT_START_TIME',
-  'EVENT_END_TIME',
-  'EVENT_TIMEZONE',
-  'EVENT_CAPACITY',
-  'EVENT_PRICE_FROM',
-  'EVENT_CURRENCY',
-  'EVENT_LANGUAGE',
-  'EVENT_EMAIL',
-  'EVENT_PHONE',
-  'EVENT_LINKEDIN_URL',
-  'EVENT_TWITTER_URL',
-  'EVENT_FACEBOOK_URL',
-  'EVENT_SPEAKERS',
-  'EVENT_SCHEDULE',
-  'EVENT_SPONSORS'
-] as const;
 
 export interface Speaker {
   name: string;
@@ -59,13 +27,9 @@ export interface ParsedEnvVars extends Omit<EventConfig, 'EVENT_SPEAKERS' | 'EVE
 }
 
 export async function getEnvVars(): Promise<ParsedEnvVars> {
-  // Get the host from the request headers
-  const headersList = headers();
-  const host = (await headersList).get('host') || '';
-  const domain = host.replace(/^www\./, '');
-
-  // Get the configuration for the current domain
-  const config = events[domain] || defaultEvent;
+  // For static exports, we'll use the default event
+  // In a real-world scenario, you would determine the event based on the build-time environment
+  const config = defaultEvent;
 
   return {
     ...config,

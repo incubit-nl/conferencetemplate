@@ -9,8 +9,8 @@ import { Speakers } from '@/components/Speakers';
 import { Schedule } from '@/components/Schedule';
 import { Sponsors } from '@/components/Sponsors';
 
-export default function Home() {
-  const env = getEnvVars();
+export default async function Home() {
+  const env = await getEnvVars();
 
   return (
     <>
@@ -86,8 +86,13 @@ export default function Home() {
                 <Users className="h-8 w-8" />
                 <div>
                   <h3 className="brutal-text font-bold">Capacity</h3>
-                  <p>{env.EVENT_CAPACITY} Attendees</p>
-                  <p className="text-sm">Starting from {env.EVENT_CURRENCY} {env.EVENT_PRICE_FROM}</p>
+                  <p>{parseInt(env.EVENT_CAPACITY).toLocaleString()} Attendees</p>
+                  <p className="text-sm">
+                    {env.EVENT_PRICE_FROM === "0" 
+                      ? "Free Entry"
+                      : `Starting from ${env.EVENT_CURRENCY} ${env.EVENT_PRICE_FROM}`
+                    }
+                  </p>
                 </div>
               </div>
             </div>
