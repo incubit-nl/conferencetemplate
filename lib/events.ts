@@ -746,7 +746,6 @@ export const events: Record<string, EventConfig> = {
     EVENT_NAME: "Grachtenfestival 2025",
     EVENT_DATE: "2025-08-15",
     EVENT_LOCATION: "Amsterdam Canals",
-    EVENT_DESCRIPTION: "A unique classical music festival set along Amsterdam's historic canals, featuring over 250 concerts at {
     EVENT_DESCRIPTION: "A unique classical music festival set along Amsterdam's historic canals, featuring over 250 concerts at iconic locations. Experience world-class performances on boats, in historic buildings, and in hidden gardens throughout the city.",
     EVENT_SHORT_DESCRIPTION: "Amsterdam's classical music festival on the canals",
     EVENT_TICKETS_URL: "https://tickets.grachtenfestival2025.nl",
@@ -1465,16 +1464,336 @@ export const events: Record<string, EventConfig> = {
       }
     ])
   },
+    'zuidasrun2025.nl': {
+      GA_MEASUREMENT_ID: "G-KEN81FKB6R",
+      EVENT_TIMEZONE: "Europe/Amsterdam",
+      EVENT_CURRENCY: "EUR",
+      EVENT_LANGUAGE: "English",
+      EVENT_NAME: "Zuidas Run 2025",
+      EVENT_DATE: "2025-09-07",
+      EVENT_LOCATION: "Zuidas, Amsterdam",
+      EVENT_DESCRIPTION: "A unique urban running event through Amsterdam's business district. Choose between 4, 10, or 16 kilometer routes past iconic office buildings and modern architecture. Experience the energy of Amsterdam's financial heart while challenging yourself in this corporate running event.",
+      EVENT_SHORT_DESCRIPTION: "Amsterdam's business district running event",
+      EVENT_TICKETS_URL: "https://tickets.zuidasrun2025.nl",
+      EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5",
+      EVENT_TWITTER_HANDLE: "@zuidasrun",
+      EVENT_KEYWORDS: "running, marathon, amsterdam, zuidas, business district, fitness, health, netherlands, corporate run",
+      EVENT_ORGANIZER: "Le Champion",
+      EVENT_ORGANIZER_URL: "https://www.lechampion.nl",
+      SITE_URL: "https://zuidasrun2025.nl",
+      EVENT_START_TIME: "09:00",
+      EVENT_END_TIME: "14:00",
+      EVENT_CAPACITY: "10000",
+      EVENT_PRICE_FROM: "25",
+      EVENT_EMAIL: "info@zuidasrun.nl",
+      EVENT_PHONE: "+31 20 555 0303",
+      EVENT_LINKEDIN_URL: "https://linkedin.com/company/zuidas-run",
+      EVENT_TWITTER_URL: "https://twitter.com/zuidasrun",
+      EVENT_FACEBOOK_URL: "https://facebook.com/zuidasrun",
+      EVENT_SPEAKERS: JSON.stringify([
+        {
+          name: "Olympic Athlete",
+          title: "Event Ambassador",
+          company: "Dutch Athletics Federation",
+          image: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5"
+        }
+      ]),
+      EVENT_SCHEDULE: JSON.stringify([
+        {
+          time: "08:00",
+          title: "Registration Opens",
+          location: "WTC Amsterdam"
+        },
+        {
+          time: "09:00",
+          title: "16K Run Start",
+          location: "Gustav Mahlerlaan"
+        },
+        {
+          time: "09:30",
+          title: "10K Run Start",
+          location: "Gustav Mahlerlaan"
+        },
+        {
+          time: "10:00",
+          title: "4K Fun Run Start",
+          location: "Gustav Mahlerlaan"
+        }
+      ]),
+      EVENT_SPONSORS: JSON.stringify([
+        {
+          name: "ABN AMRO",
+          tier: "platinum",
+          logo: "https://example.com/abnamro-logo.png"
+        },
+        {
+          name: "Zuidas Amsterdam",
+          tier: "platinum",
+          logo: "https://example.com/zuidas-logo.png"
+        }
+      ])
+    },
+  
+    'lichtenfestivalamsterdam.nl': {
+      GA_MEASUREMENT_ID: "G-KEN81FKB6R",
+      EVENT_TIMEZONE: "Europe/Amsterdam",
+      EVENT_CURRENCY: "EUR",
+      EVENT_LANGUAGE: "English",
+      EVENT_NAME: "Amsterdam Light Festival 2025",
+      EVENT_DATE: "2025-12-01",
+      EVENT_LOCATION: "Amsterdam City Center",
+      EVENT_DESCRIPTION: "Experience Amsterdam's winter nights transformed by spectacular light art installations. The 14th edition features works by international artists illuminating the city's canals and historic center, creating a magical outdoor exhibition that can be enjoyed by boat or on foot.",
+      EVENT_SHORT_DESCRIPTION: "Amsterdam's winter light art festival",
+      EVENT_TICKETS_URL: "https://tickets.lichtenfestivalamsterdam.nl",
+      EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad",
+      EVENT_TWITTER_HANDLE: "@amsterdamlight",
+      EVENT_KEYWORDS: "light festival, amsterdam, art, winter, canal tour, light art, exhibition, netherlands",
+      EVENT_ORGANIZER: "Amsterdam Light Festival Foundation",
+      EVENT_ORGANIZER_URL: "https://amsterdamlightfestival.com",
+      SITE_URL: "https://lichtenfestivalamsterdam.nl",
+      EVENT_START_TIME: "17:00",
+      EVENT_END_TIME: "23:00",
+      EVENT_CAPACITY: "900000",
+      EVENT_PRICE_FROM: "22.50",
+      EVENT_EMAIL: "info@amsterdamlightfestival.com",
+      EVENT_PHONE: "+31 20 555 0123",
+      EVENT_LINKEDIN_URL: "https://linkedin.com/company/amsterdam-light-festival",
+      EVENT_TWITTER_URL: "https://twitter.com/amsterdamlight",
+      EVENT_FACEBOOK_URL: "https://facebook.com/amsterdamlightfestival",
+      EVENT_SPEAKERS: JSON.stringify([
+        {
+          name: "International Light Artists",
+          title: "Featured Artists",
+          company: "Various Studios",
+          image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad"
+        }
+      ]),
+      EVENT_SCHEDULE: JSON.stringify([
+        {
+          time: "17:00",
+          title: "Festival Opens",
+          location: "Various Locations"
+        },
+        {
+          time: "17:30",
+          title: "Guided Boat Tours Start",
+          location: "Canal Ring"
+        },
+        {
+          time: "19:00",
+          title: "Walking Tours Start",
+          location: "City Center"
+        }
+      ]),
+      EVENT_SPONSORS: JSON.stringify([
+        {
+          name: "Gemeente Amsterdam",
+          tier: "platinum",
+          logo: "https://example.com/amsterdam-logo.png"
+        },
+        {
+          name: "Canal Company",
+          tier: "gold",
+          logo: "https://example.com/canal-logo.png"
+        }
+      ])
+    },
+  
+    'blockchainweekamsterdam.nl': {
+      GA_MEASUREMENT_ID: "G-KEN81FKB6R",
+      EVENT_TIMEZONE: "Europe/Amsterdam",
+      EVENT_CURRENCY: "EUR",
+      EVENT_LANGUAGE: "English",
+      EVENT_NAME: "Amsterdam Blockchain Week 2025",
+      EVENT_DATE: "2025-06-20",
+      EVENT_LOCATION: "Various Venues, Amsterdam",
+      EVENT_DESCRIPTION: "A week-long exploration of blockchain technology and its applications, featuring conferences, workshops, hackathons, and networking events. Join industry leaders, developers, and entrepreneurs in shaping the future of Web3.",
+      EVENT_SHORT_DESCRIPTION: "Amsterdam's premier blockchain event",
+      EVENT_TICKETS_URL: "https://tickets.blockchainweekamsterdam.nl",
+      EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0",
+      EVENT_TWITTER_HANDLE: "@ABW2025",
+      EVENT_KEYWORDS: "blockchain, cryptocurrency, web3, technology, amsterdam, fintech, defi, nft",
+      EVENT_ORGANIZER: "Amsterdam Blockchain Week Foundation",
+      EVENT_ORGANIZER_URL: "https://blockchainweekamsterdam.nl",
+      SITE_URL: "https://blockchainweekamsterdam.nl",
+      EVENT_START_TIME: "09:00",
+      EVENT_END_TIME: "18:00",
+      EVENT_CAPACITY: "5000",
+      EVENT_PRICE_FROM: "299",
+      EVENT_EMAIL: "info@blockchainweekamsterdam.nl",
+      EVENT_PHONE: "+31 20 555 0456",
+      EVENT_LINKEDIN_URL: "https://linkedin.com/company/amsterdam-blockchain-week",
+      EVENT_TWITTER_URL: "https://twitter.com/ABW2025",
+      EVENT_FACEBOOK_URL: "https://facebook.com/amsterdamblockchainweek",
+      EVENT_SPEAKERS: JSON.stringify([
+        {
+          name: "Blockchain Leaders",
+          title: "Industry Experts",
+          company: "Various Organizations",
+          image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0"
+        }
+      ]),
+      EVENT_SCHEDULE: JSON.stringify([
+        {
+          time: "09:00",
+          title: "Conference Day 1",
+          location: "Beurs van Berlage"
+        },
+        {
+          time: "14:00",
+          title: "Hackathon Kickoff",
+          location: "TQ Amsterdam"
+        },
+        {
+          time: "16:00",
+          title: "Networking Event",
+          location: "Various Venues"
+        }
+      ]),
+      EVENT_SPONSORS: JSON.stringify([
+        {
+          name: "Ethereum Foundation",
+          tier: "platinum",
+          logo: "https://example.com/ethereum-logo.png"
+        },
+        {
+          name: "Dutch Blockchain Coalition",
+          tier: "gold",
+          logo: "https://example.com/dbc-logo.png"
+        }
+      ])
+    },
+  
+    'amsterdamgrachtenfestival.nl': {
+      GA_MEASUREMENT_ID: "G-KEN81FKB6R",
+      EVENT_TIMEZONE: "Europe/Amsterdam",
+      EVENT_CURRENCY: "EUR",
+      EVENT_LANGUAGE: "English",
+      EVENT_NAME: "Grachtenfestival 2025",
+      EVENT_DATE: "2025-08-15",
+      EVENT_LOCATION: "Amsterdam Canals",
+      EVENT_DESCRIPTION: "A unique classical music festival set along Amsterdam's historic canals, featuring over 250 concerts at iconic locations. Experience world-class performances on boats, in historic buildings, and in hidden gardens throughout the city.",
+      EVENT_SHORT_DESCRIPTION: "Amsterdam's classical music festival on the canals",
+      EVENT_TICKETS_URL: "https://tickets.amsterdamgrachtenfestival.nl",
+      EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1534277621182-d6c604a7c8b6",
+      EVENT_TWITTER_HANDLE: "@grachtenfest",
+      EVENT_KEYWORDS: "classical music, amsterdam canals, music festival, culture, netherlands, concerts, chamber music",
+      EVENT_ORGANIZER: "Grachtenfestival Foundation",
+      EVENT_ORGANIZER_URL: "https://www.grachtenfestival.nl",
+      SITE_URL: "https://amsterdamgrachtenfestival.nl",
+      EVENT_START_TIME: "11:00",
+      EVENT_END_TIME: "23:00",
+      EVENT_CAPACITY: "55000",
+      EVENT_PRICE_FROM: "15",
+      EVENT_EMAIL: "info@grachtenfestival.nl",
+      EVENT_PHONE: "+31 20 421 4542",
+      EVENT_LINKEDIN_URL: "https://linkedin.com/company/grachtenfestival",
+      EVENT_TWITTER_URL: "https://twitter.com/grachtenfest",
+      EVENT_FACEBOOK_URL: "https://facebook.com/grachtenfestival",
+      EVENT_SPEAKERS: JSON.stringify([
+        {
+          name: "Classical Musicians",
+          title: "International Artists",
+          company: "Various Orchestras",
+          image: "https://images.unsplash.com/photo-1534277621182-d6c604a7c8b6"
+        }
+      ]),
+      EVENT_SCHEDULE: JSON.stringify([
+        {
+          time: "11:00",
+          title: "Opening Concert",
+          location: "Muziekgebouw aan 't IJ"
+        },
+        {
+          time: "14:00",
+          title: "Canal Concerts",
+          location: "Various Canals"
+        },
+        {
+          time: "20:00",
+          title: "Evening Performance",
+          location: "Royal Palace"
+        }
+      ]),
+      EVENT_SPONSORS: JSON.stringify([
+        {
+          name: "Gemeente Amsterdam",
+          tier: "platinum",
+          logo: "https://example.com/amsterdam-logo.png"
+        },
+        {
+          name: "Dutch Culture Fund",
+          tier: "gold",
+          logo: "https://example.com/dcf-logo.png"
+        }
+      ])
+    },
+  
+    'amsterdamartweek.nl': {
+      GA_MEASUREMENT_ID: "G-KEN81FKB6R",
+      EVENT_TIMEZONE: "Europe/Amsterdam",
+      EVENT_CURRENCY: "EUR",
+      EVENT_LANGUAGE: "English",
+      EVENT_NAME: "Amsterdam Art Week 2025",
+      EVENT_DATE: "2025-05-12",
+      EVENT_LOCATION: "Various Locations, Amsterdam",
+      EVENT_DESCRIPTION: "Amsterdam's contemporary art scene comes alive with exhibitions, performances, and events across galleries, museums, and artist studios. Discover emerging artists, attend exclusive openings, and explore the city's vibrant art community.",
+      EVENT_SHORT_DESCRIPTION: "Amsterdam's contemporary art celebration",
+      EVENT_TICKETS_URL: "https://tickets.amsterdamartweek.nl",
+      EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1594388384960-de72b561d632",
+      EVENT_TWITTER_HANDLE: "@ArtWeekAMS",
+      EVENT_KEYWORDS: "art, contemporary art, amsterdam, galleries, exhibitions, culture, museums, netherlands",
+      EVENT_ORGANIZER: "Amsterdam Art Foundation",
+      EVENT_ORGANIZER_URL: "https://amsterdamart.com",
+      SITE_URL: "https://amsterdamartweek.nl",
+      EVENT_START_TIME: "10:00",
+      EVENT_END_TIME: "22:00",
+      EVENT_CAPACITY: "75000",
+      EVENT_PRICE_FROM: "20",
+      EVENT_EMAIL: "info@amsterdamartweek.nl",
+      EVENT_PHONE: "+31 20 555 0789",
+      EVENT_LINKEDIN_URL: "https://linkedin.com/company/amsterdam-art-week",
+      EVENT_TWITTER_URL: "https://twitter.com/ArtWeekAMS",
+      EVENT_FACEBOOK_URL: "https://facebook.com/amsterdamartweek",
+      EVENT_SPEAKERS: JSON.stringify([
+        {
+          name: "Contemporary Artists",
+          title: "Featured Artists",
+          company: "Various Galleries",
+          image: "https://images.unsplash.com/photo-1594388384960-de72b561d632"
+        }
+      ]),
+      EVENT_SCHEDULE: JSON.stringify([
+        {
+          time: "10:00",
+          title: "Gallery Openings",
+          location: "Various Galleries"
+        },
+        {
+          time: "14:00",
+          title: "Artist Talks",
+          location: "Stedelijk Museum"
+        },
+        {
+          time: "19:00",
+          title: "Evening Exhibitions",
+          location: "Multiple Venues"
+        }
+      ]),
+      EVENT_SPONSORS: JSON.stringify([
+        {
+          name: "Mondriaan Fund",
+          tier: "platinum",
+          logo: "https://example.com/mondriaan-logo.png"
+        },
+        {
+          name: "Amsterdam Fund for the Arts",
+          tier: "gold",
+          logo: "https://example.com/afa-logo.png"
+        }
+      ])
+    }
+  };
 
-  'zuidasrun2025.nl': {
-    ...commonConfig,
-    EVENT_NAME: "Zuidas Run 2025",
-    EVENT_DATE: "2025-09-07",
-    EVENT_LOCATION: "Zuidas, Amsterdam",
-    EVENT_DESCRIPTION: "A unique urban running event through Amsterdam's business district. Choose between 4, 10, or 16 kilometer routes past iconic office buildings and modern architecture.",
-    EVENT_SHORT_DESCRIPTION: "Amsterdam's business district running event",
-    EVENT_TICKETS_URL: "https://tickets.zuidasrun2025.nl",
-    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1552674605-db6ffd4facb5",
-    EVENT_TWITTER_HANDLE: "@zuidasrun",
-    EVENT_KEYWORDS: "running, marathon, amsterdam, zuidas, business district, fitness, health, netherlands",
-    EVENT_ORGANIZER: "Le Champion",
+// Default event configuration (fallback)
+export const defaultEvent = events['ade2025.nl'];
