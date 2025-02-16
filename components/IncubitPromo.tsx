@@ -48,7 +48,7 @@ export function IncubitPromo() {
                     style={{ backgroundColor: '#FFD600', color: '#000' }}
                 >
                     <a 
-                        href="https://incubit.nl" 
+                        href="https://incubit.io" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="flex items-center justify-center gap-2"
