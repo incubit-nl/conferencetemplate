@@ -1854,8 +1854,1121 @@ export const events: Record<string, EventConfig> = {
           logo: "https://example.com/afa-logo.png"
         }
       ])
-    }
-  };
+    },
+  'exitfestival2025.nl': {
+    ...commonConfig,
+    GA_MEASUREMENT_ID: "G-KEN81FKB6R",
+    EVENT_NAME: "Exit Festival 2025",
+    EVENT_DATE: "2025-07-10",
+    EVENT_LOCATION: "Petrovaradin Fortress, Novi Sad, Serbia",
+    EVENT_DESCRIPTION: "Experience one of Europe's leading summer music festivals in the stunning 18th-century Petrovaradin Fortress. Exit Festival 2025 brings together the best in electronic, rock, metal, hip-hop, and reggae music across multiple stages in this UNESCO World Heritage site.",
+    EVENT_SHORT_DESCRIPTION: "Award-winning festival in a historic fortress",
+    EVENT_TICKETS_URL: "https://tickets.exitfestival2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3",
+    EVENT_TWITTER_HANDLE: "@ExitFestival",
+    EVENT_KEYWORDS: "exit festival, music festival, serbia, electronic music, rock music, fortress festival, summer festival",
+    EVENT_ORGANIZER: "Exit Foundation",
+    EVENT_ORGANIZER_URL: "https://exitfestival2025.nl",
+    SITE_URL: "https://exitfestival2025.nl",
+    EVENT_START_TIME: "14:00",
+    EVENT_END_TIME: "06:00",
+    EVENT_CAPACITY: "200000",
+    EVENT_PRICE_FROM: "129",
+    EVENT_EMAIL: "info@exitfestival.nl",
+    EVENT_PHONE: "+31 20 555 0102",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/exit-festival",
+    EVENT_TWITTER_URL: "https://twitter.com/ExitFestival",
+    EVENT_FACEBOOK_URL: "https://facebook.com/exit.festival",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Carl Cox",
+        title: "Techno Legend",
+        company: "Intec Digital",
+        image: "https://images.unsplash.com/photo-1519699047748-de8e457a634e"
+      },
+      {
+        name: "The Prodigy",
+        title: "Electronic Music Pioneers",
+        company: "Take Me To The Hospital",
+        image: "https://images.unsplash.com/photo-1524650359799-842906ca1c06"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "14:00",
+        title: "Gates Open",
+        location: "Main Entrance"
+      },
+      {
+        time: "20:00",
+        title: "Main Stage Opening",
+        speaker: "Local Heroes",
+        location: "Main Stage"
+      },
+      {
+        time: "22:00",
+        title: "The Prodigy Live",
+        speaker: "The Prodigy",
+        location: "Main Stage"
+      },
+      {
+        time: "00:00",
+        title: "Carl Cox Techno Set",
+        speaker: "Carl Cox",
+        location: "Dance Arena"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Heineken",
+        tier: "platinum",
+        logo: "https://example.com/heineken-logo.png"
+      },
+      {
+        name: "Red Bull",
+        tier: "platinum",
+        logo: "https://example.com/redbull-logo.png"
+      }
+    ])
+  },
+
+  'rockamring2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Rock am Ring 2025",
+    EVENT_DATE: "2025-06-06",
+    EVENT_LOCATION: "Nürburgring, Nürburg, Germany",
+    EVENT_DESCRIPTION: "One of Europe's largest rock music festivals, Rock am Ring 2025 returns to the legendary Nürburgring racing track. Experience three days of the best rock, metal, alternative, and electronic music across multiple stages in this unique setting.",
+    EVENT_SHORT_DESCRIPTION: "Legendary rock festival at Nürburgring",
+    EVENT_TICKETS_URL: "https://tickets.rockamring2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14",
+    EVENT_TWITTER_HANDLE: "@rockamring",
+    EVENT_KEYWORDS: "rock am ring, rock music, metal, alternative, music festival, nurburgring, germany",
+    EVENT_ORGANIZER: "Marek Lieberberg Konzertagentur",
+    EVENT_ORGANIZER_URL: "https://rockamring2025.nl",
+    SITE_URL: "https://rockamring2025.nl",
+    EVENT_START_TIME: "12:00",
+    EVENT_END_TIME: "23:00",
+    EVENT_CAPACITY: "150000",
+    EVENT_PRICE_FROM: "199",
+    EVENT_EMAIL: "info@rockamring.nl",
+    EVENT_PHONE: "+31 20 555 0103",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/rock-am-ring",
+    EVENT_TWITTER_URL: "https://twitter.com/rockamring",
+    EVENT_FACEBOOK_URL: "https://facebook.com/rockamring",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Foo Fighters",
+        title: "Headlining Band",
+        company: "Roswell Records",
+        image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7"
+      },
+      {
+        name: "Rammstein",
+        title: "Industrial Metal Icons",
+        company: "Universal Music",
+        image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "12:00",
+        title: "Festival Opens",
+        location: "Main Entrance"
+      },
+      {
+        time: "16:00",
+        title: "Rising Stars Showcase",
+        location: "Alternate Stage"
+      },
+      {
+        time: "20:00",
+        title: "Rammstein",
+        speaker: "Rammstein",
+        location: "Main Stage"
+      },
+      {
+        time: "22:00",
+        title: "Foo Fighters",
+        speaker: "Foo Fighters",
+        location: "Main Stage"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Monster Energy",
+        tier: "platinum",
+        logo: "https://example.com/monster-logo.png"
+      },
+      {
+        name: "Harley-Davidson",
+        tier: "gold",
+        logo: "https://example.com/harley-logo.png"
+      }
+    ])
+  },
+
+  'coachella2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Coachella Valley Music and Arts Festival 2025",
+    EVENT_DATE: "2025-04-11",
+    EVENT_LOCATION: "Empire Polo Club, Indio, California",
+    EVENT_DESCRIPTION: "The world-renowned Coachella Festival returns in 2025, bringing together the biggest names in music, groundbreaking art installations, and an unforgettable desert experience. Two weekends of diverse musical performances across multiple stages, featuring genres from indie rock to electronic, hip-hop, and beyond.",
+    EVENT_SHORT_DESCRIPTION: "Iconic music & arts festival in the California desert",
+    EVENT_TICKETS_URL: "https://tickets.coachella2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1537044333255-6fa3b5363e11",
+    EVENT_TWITTER_HANDLE: "@coachella",
+    EVENT_KEYWORDS: "coachella, music festival, arts festival, california, indie music, hip-hop, electronic music, desert festival",
+    EVENT_ORGANIZER: "Goldenvoice",
+    EVENT_ORGANIZER_URL: "https://coachella2025.nl",
+    SITE_URL: "https://coachella2025.nl",
+    EVENT_START_TIME: "11:00",
+    EVENT_END_TIME: "01:00",
+    EVENT_CAPACITY: "250000",
+    EVENT_PRICE_FROM: "449",
+    EVENT_EMAIL: "info@coachella.nl",
+    EVENT_PHONE: "+31 20 555 0104",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/coachella",
+    EVENT_TWITTER_URL: "https://twitter.com/coachella",
+    EVENT_FACEBOOK_URL: "https://facebook.com/coachella",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Dua Lipa",
+        title: "Pop Superstar",
+        company: "Warner Records",
+        image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f"
+      },
+      {
+        name: "Kendrick Lamar",
+        title: "Hip-Hop Artist",
+        company: "TDE",
+        image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "11:00",
+        title: "Gates Open",
+        location: "Main Entrance"
+      },
+      {
+        time: "14:00",
+        title: "Art Installation Tours",
+        location: "Festival Grounds"
+      },
+      {
+        time: "20:00",
+        title: "Dua Lipa Performance",
+        speaker: "Dua Lipa",
+        location: "Coachella Stage"
+      },
+      {
+        time: "22:30",
+        title: "Kendrick Lamar Headline Set",
+        speaker: "Kendrick Lamar",
+        location: "Coachella Stage"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "American Express",
+        tier: "presenting",
+        logo: "https://example.com/amex-logo.png"
+      },
+      {
+        name: "BMW",
+        tier: "platinum",
+        logo: "https://example.com/bmw-logo.png"
+      }
+    ])
+  },
+
+  'zwartecross2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Zwarte Cross 2025",
+    EVENT_DATE: "2025-07-18",
+    EVENT_LOCATION: "Lichtenvoorde, Netherlands",
+    EVENT_DESCRIPTION: "The largest motorcycle and music festival in the world, Zwarte Cross combines motocross racing, music, theater, and comedy for a unique Dutch festival experience. Featuring multiple stages of rock, pop, and electronic music alongside spectacular motorsports events.",
+    EVENT_SHORT_DESCRIPTION: "Ultimate combination of motorcross and music",
+    EVENT_TICKETS_URL: "https://tickets.zwartecross2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1505673542670-a5e3ff5b14a3",
+    EVENT_TWITTER_HANDLE: "@zwartecross",
+    EVENT_KEYWORDS: "zwarte cross, motorcross, music festival, dutch festival, rock music, motorsports, theater",
+    EVENT_ORGANIZER: "Feestfabriek Alles Komt Goed BV",
+    EVENT_ORGANIZER_URL: "https://zwartecross2025.nl",
+    SITE_URL: "https://zwartecross2025.nl",
+    EVENT_START_TIME: "10:00",
+    EVENT_END_TIME: "01:00",
+    EVENT_CAPACITY: "220000",
+    EVENT_PRICE_FROM: "89",
+    EVENT_EMAIL: "info@zwartecross.nl",
+    EVENT_PHONE: "+31 20 555 0105",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/zwarte-cross",
+    EVENT_TWITTER_URL: "https://twitter.com/zwartecross",
+    EVENT_FACEBOOK_URL: "https://facebook.com/zwartecross",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Di-rect",
+        title: "Dutch Rock Band",
+        company: "Universal Music",
+        image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4"
+      },
+      {
+        name: "Jeffrey Herlings",
+        title: "MXGP World Champion",
+        company: "Red Bull KTM Factory Racing",
+        image: "https://images.unsplash.com/photo-1533107862482-0e6974b06ec4"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "10:00",
+        title: "Festival Opens",
+        location: "Main Gate"
+      },
+      {
+        time: "12:00",
+        title: "Motorcross Qualifications",
+        location: "Racing Track"
+      },
+      {
+        time: "15:00",
+        title: "Stunt Show",
+        location: "Stunt Arena"
+      },
+      {
+        time: "21:00",
+        title: "Di-rect Headline Show",
+        speaker: "Di-rect",
+        location: "Main Stage"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Grolsch",
+        tier: "presenting",
+        logo: "https://example.com/grolsch-logo.png"
+      },
+      {
+        name: "KTM",
+        tier: "platinum",
+        logo: "https://example.com/ktm-logo.png"
+      }
+    ])
+  },
+
+  'burningman2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Burning Man 2025",
+    EVENT_DATE: "2025-08-24",
+    EVENT_LOCATION: "Black Rock Desert, Nevada",
+    EVENT_DESCRIPTION: "Experience the transformative power of Burning Man in the Black Rock Desert. This unique gathering combines art, self-expression, and community in a temporary city. Featuring massive art installations, theme camps, and performances in a radical environment of creativity and innovation.",
+    EVENT_SHORT_DESCRIPTION: "Temporary city of art and radical self-expression",
+    EVENT_TICKETS_URL: "https://tickets.burningman2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1532098850201-89d86eeb345a",
+    EVENT_TWITTER_HANDLE: "@burningman",
+    EVENT_KEYWORDS: "burning man, art festival, black rock city, desert festival, installation art, community, radical self-expression",
+    EVENT_ORGANIZER: "Burning Man Project",
+    EVENT_ORGANIZER_URL: "https://burningman2025.nl",
+    SITE_URL: "https://burningman2025.nl",
+    EVENT_START_TIME: "00:00",
+    EVENT_END_TIME: "23:59",
+    EVENT_CAPACITY: "80000",
+    EVENT_PRICE_FROM: "575",
+    EVENT_EMAIL: "info@burningman.nl",
+    EVENT_PHONE: "+31 20 555 0106",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/burning-man-project",
+    EVENT_TWITTER_URL: "https://twitter.com/burningman",
+    EVENT_FACEBOOK_URL: "https://facebook.com/burningman",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Larry Harvey",
+        title: "Burning Man Founder",
+        company: "Burning Man Project",
+        image: "https://images.unsplash.com/photo-1531384441138-2736e62e0919"
+      },
+      {
+        name: "Marian Goodell",
+        title: "CEO",
+        company: "Burning Man Project",
+        image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "00:00",
+        title: "Gates Open",
+        location: "Black Rock City"
+      },
+      {
+        time: "Sunset",
+        title: "Art Tour",
+        location: "Deep Playa"
+      },
+      {
+        time: "20:00",
+        title: "Temple Ceremony",
+        location: "The Temple"
+      },
+      {
+        time: "21:00",
+        title: "Man Burn",
+        location: "The Man"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Independent",
+        tier: "community",
+        logo: "https://example.com/bm-logo.png"
+      }
+    ])
+  },
+
+  'vierdaagsefeesten2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Vierdaagsefeesten 2025",
+    EVENT_DATE: "2025-07-15",
+    EVENT_LOCATION: "Nijmegen, Netherlands",
+    EVENT_DESCRIPTION: "The largest free music and cultural festival in the Netherlands, coinciding with the International Four Days Marches. Experience seven days of music, culture, and entertainment across multiple stages throughout the historic city of Nijmegen.",
+    EVENT_SHORT_DESCRIPTION: "Largest free festival in the Netherlands",
+    EVENT_TICKETS_URL: "https://tickets.vierdaagsefeesten2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1533137098665-47ca60257cec",
+    EVENT_TWITTER_HANDLE: "@vierdaagsefeest",
+    EVENT_KEYWORDS: "vierdaagsefeesten, nijmegen, music festival, cultural festival, four days marches, dutch festival",
+    EVENT_ORGANIZER: "Stichting Vierdaagsefeesten",
+    EVENT_ORGANIZER_URL: "https://vierdaagsefeesten2025.nl",
+    SITE_URL: "https://vierdaagsefeesten2025.nl",
+    EVENT_START_TIME: "13:00",
+    EVENT_END_TIME: "02:00",
+    EVENT_CAPACITY: "1000000",
+    EVENT_PRICE_FROM: "0",
+    EVENT_EMAIL: "info@vierdaagsefeesten.nl",
+    EVENT_PHONE: "+31 20 555 0107",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/vierdaagsefeesten",
+    EVENT_TWITTER_URL: "https://twitter.com/vierdaagsefeest",
+    EVENT_FACEBOOK_URL: "https://facebook.com/vierdaagsefeesten",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Guus Meeuwis",
+        title: "Dutch Singer",
+        company: "Universal Music",
+        image: "https://images.unsplash.com/photo-1549213783-8284d0336c4f"
+      },
+      {
+        name: "Chef'Special",
+        title: "Dutch Band",
+        company: "TopNotch",
+        image: "https://images.unsplash.com/photo-1570499911518-f6c5c4e8bca9"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "13:00",
+        title: "Festival Opens",
+        location: "Grote Markt"
+      },
+      {
+        time: "16:00",
+        title: "Cultural Performances",
+        location: "Various Locations"
+      },
+      {
+        time: "20:00",
+        title: "Guus Meeuwis Concert",
+        speaker: "Guus Meeuwis",
+        location: "Main Stage"
+      },
+      {
+        time: "22:00",
+        title: "Chef'Special Performance",
+        speaker: "Chef'Special",
+        location: "Waalkade"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Heineken",
+        tier: "platinum",
+        logo: "https://example.com/heineken-logo.png"
+      },
+      {
+        name: "Rabobank",
+        tier: "gold",
+        logo: "https://example.com/rabobank-logo.png"
+      }
+    ])
+  },
+
+  'sziget2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Sziget Festival 2025",
+    EVENT_DATE: "2025-08-06",
+    EVENT_LOCATION: "Óbudai-sziget, Budapest, Hungary",
+    EVENT_DESCRIPTION: "One of Europe's largest music and cultural festivals, Sziget transforms Budapest's Óbuda Island into a week-long celebration of music, art, and culture. Experience diverse musical performances, theater, circus, and art installations in this unique festival city.",
+    EVENT_SHORT_DESCRIPTION: "Week-long island festival of freedom",
+    EVENT_TICKETS_URL: "https://tickets.sziget2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea",
+    EVENT_TWITTER_HANDLE: "@szigetofficial",
+    EVENT_KEYWORDS: "sziget festival, budapest, music festival, cultural festival, island festival, arts, theater",
+    EVENT_ORGANIZER: "Sziget Cultural Management Ltd",
+    EVENT_ORGANIZER_URL: "https://sziget2025.nl",
+    SITE_URL: "https://sziget2025.nl",
+    EVENT_START_TIME: "06:00",
+    EVENT_END_TIME: "04:00",
+    EVENT_CAPACITY: "450000",
+    EVENT_PRICE_FROM: "199",
+    EVENT_EMAIL: "info@sziget.nl",
+    EVENT_PHONE: "+31 20 555 0108",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/sziget-festival",
+    EVENT_TWITTER_URL: "https://twitter.com/szigetofficial",
+    EVENT_FACEBOOK_URL: "https://facebook.com/szigetfestival",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Arctic Monkeys",
+        title: "Headlining Band",
+        company: "Domino Records",
+        image: "https://images.unsplash.com/photo-1598387181032-a3103a2db5b3"
+      },
+      {
+        name: "Billie Eilish",
+        title: "Pop Artist",
+        company: "Interscope Records",
+        image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "06:00",
+        title: "Yoga Session",
+        location: "Beach Stage"
+      },
+      {
+        time: "14:00",
+        title: "Circus Shows",
+        location: "Circus Tent"
+      },
+      {
+        time: "20:00",
+        title: "Arctic Monkeys",
+        speaker: "Arctic Monkeys",
+        location: "Main Stage"
+      },
+      {
+        time: "22:30",
+        title: "Billie Eilish",
+        speaker: "Billie Eilish",
+        location: "Main Stage"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Vodafone",
+        tier: "presenting",
+        logo: "https://example.com/vodafone-logo.png"
+      },
+      {
+        name: "Mastercard",
+        tier: "platinum",
+        logo: "https://example.com/mastercard-logo.png"
+      }
+    ])
+  },
+
+  'intothewoods2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Into The Woods 2025",
+    EVENT_DATE: "2025-09-12",
+    EVENT_LOCATION: "Amersfoort, Netherlands",
+    EVENT_DESCRIPTION: "A magical electronic music festival set in the heart of the Dutch forest. Into The Woods combines cutting-edge electronic music with stunning natural surroundings, creating an immersive experience where nature meets technology.",
+    EVENT_SHORT_DESCRIPTION: "Electronic music festival in nature",
+    EVENT_TICKETS_URL: "https://tickets.intothewoods2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1506157786151-b8491531f063",
+    EVENT_TWITTER_HANDLE: "@intothewoodsnl",
+    EVENT_KEYWORDS: "into the woods, electronic music, forest festival, nature, techno, house music, netherlands",
+    EVENT_ORGANIZER: "Into The Woods Foundation",
+    EVENT_ORGANIZER_URL: "https://intothewoods2025.nl",
+    SITE_URL: "https://intothewoods2025.nl",
+    EVENT_START_TIME: "12:00",
+    EVENT_END_TIME: "23:00",
+    EVENT_CAPACITY: "15000",
+    EVENT_PRICE_FROM: "65",
+    EVENT_EMAIL: "info@intothewoods.nl",
+    EVENT_PHONE: "+31 20 555 0109",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/into-the-woods",
+    EVENT_TWITTER_URL: "https://twitter.com/intothewoodsnl",
+    EVENT_FACEBOOK_URL: "https://facebook.com/intothewoodsfestival",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Amelie Lens",
+        title: "Techno DJ",
+        company: "Lenske",
+        image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819"
+      },
+      {
+        name: "Ben Klock",
+        title: "Techno Producer",
+        company: "Ostgut Ton",
+        image: "https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "12:00",
+        title: "Gates Open",
+        location: "Forest Entrance"
+      },
+      {
+        time: "14:00",
+        title: "Opening Ceremony",
+        location: "Main Stage"
+      },
+      {
+        time: "18:00",
+        title: "Ben Klock Set",
+        speaker: "Ben Klock",
+        location: "Forest Stage"
+      },
+      {
+        time: "21:00",
+        title: "Amelie Lens Closing",
+        speaker: "Amelie Lens",
+        location: "Main Stage"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Desperados",
+        tier: "platinum",
+        logo: "https://example.com/desperados-logo.png"
+      },
+      {
+        name: "Pioneer DJ",
+        tier: "gold",
+        logo: "https://example.com/pioneer-logo.png"
+      }
+    ])
+  },
+  'mysteryland2025.nl': {
+    ...commonConfig,
+    GA_MEASUREMENT_ID: "G-KEN81FKB6R",
+    EVENT_NAME: "Mysteryland 2025",
+    EVENT_DATE: "2025-08-23",
+    EVENT_LOCATION: "Haarlemmermeer, Netherlands",
+    EVENT_DESCRIPTION: "The world's longest-running electronic music festival returns for its 2025 edition. Mysteryland combines spectacular production, art installations, and world-class electronic music across multiple stages in a magical festival setting.",
+    EVENT_SHORT_DESCRIPTION: "Legendary electronic music festival",
+    EVENT_TICKETS_URL: "https://tickets.mysteryland2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7",
+    EVENT_TWITTER_HANDLE: "@mysteryland",
+    EVENT_KEYWORDS: "mysteryland, electronic music, dance music, festival, netherlands, edm, techno",
+    EVENT_ORGANIZER: "ID&T",
+    EVENT_ORGANIZER_URL: "https://mysteryland2025.nl",
+    SITE_URL: "https://mysteryland2025.nl",
+    EVENT_START_TIME: "11:00",
+    EVENT_END_TIME: "23:00",
+    EVENT_CAPACITY: "100000",
+    EVENT_PRICE_FROM: "89",
+    EVENT_EMAIL: "info@mysteryland.nl",
+    EVENT_PHONE: "+31 20 555 0110",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/mysteryland",
+    EVENT_TWITTER_URL: "https://twitter.com/mysteryland",
+    EVENT_FACEBOOK_URL: "https://facebook.com/mysteryland",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Armin van Buuren",
+        title: "Trance DJ",
+        company: "Armada Music",
+        image: "https://images.unsplash.com/photo-1526218626217-dc65a29bb444"
+      },
+      {
+        name: "Hardwell",
+        title: "EDM Producer",
+        company: "Revealed Recordings",
+        image: "https://images.unsplash.com/photo-1520872024865-3ff2805d8bb3"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "11:00",
+        title: "Festival Opens",
+        location: "Main Entrance"
+      },
+      {
+        time: "15:00",
+        title: "Art Tour",
+        location: "Festival Grounds"
+      },
+      {
+        time: "19:00",
+        title: "Hardwell Set",
+        speaker: "Hardwell",
+        location: "Main Stage"
+      },
+      {
+        time: "21:00",
+        title: "Armin van Buuren Closing",
+        speaker: "Armin van Buuren",
+        }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Q-Dance",
+        tier: "presenting",
+        logo: "https://example.com/qdance-logo.png"
+      },
+      {
+        name: "JBL",
+        tier: "platinum",
+        logo: "https://example.com/jbl-logo.png"
+      }
+    ])
+  },
+  'tomorrowland2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Tomorrowland 2025",
+    EVENT_DATE: "2025-07-18",
+    EVENT_LOCATION: "Boom, Belgium",
+    EVENT_DESCRIPTION: "The world's most magical electronic dance music festival returns for three weekends of unparalleled production, stunning stage designs, and the biggest names in electronic music. Experience the fantasy world of Tomorrowland in this celebration of unity and music.",
+    EVENT_SHORT_DESCRIPTION: "World's premier electronic music festival",
+    EVENT_TICKETS_URL: "https://tickets.tomorrowland2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819",
+    EVENT_TWITTER_HANDLE: "@tomorrowland",
+    EVENT_KEYWORDS: "tomorrowland, electronic music, edm festival, belgium, dance music, stage production",
+    EVENT_ORGANIZER: "We Are One World",
+    EVENT_ORGANIZER_URL: "https://tomorrowland2025.nl",
+    SITE_URL: "https://tomorrowland2025.nl",
+    EVENT_START_TIME: "12:00",
+    EVENT_END_TIME: "01:00",
+    EVENT_CAPACITY: "600000",
+    EVENT_PRICE_FROM: "299",
+    EVENT_EMAIL: "info@tomorrowland.nl",
+    EVENT_PHONE: "+31 20 555 0111",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/tomorrowland",
+    EVENT_TWITTER_URL: "https://twitter.com/tomorrowland",
+    EVENT_FACEBOOK_URL: "https://facebook.com/tomorrowland",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Swedish House Mafia",
+        title: "EDM Supergroup",
+        company: "Universal Music",
+        image: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a"
+      },
+      {
+        name: "Tiësto",
+        title: "DJ Legend",
+        company: "Musical Freedom",
+        image: "https://images.unsplash.com/photo-1520872024865-3ff2805d8bb3"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "12:00",
+        title: "DreamVille Opens",
+        location: "Festival Grounds"
+      },
+      {
+        time: "16:00",
+        title: "Opening Ceremony",
+        location: "Main Stage"
+      },
+      {
+        time: "21:00",
+        title: "Swedish House Mafia",
+        speaker: "Swedish House Mafia",
+        location: "Main Stage"
+      },
+      {
+        time: "23:00",
+        title: "Tiësto Closing Set",
+        speaker: "Tiësto",
+        location: "Main Stage"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Budweiser",
+        tier: "presenting",
+        logo: "https://example.com/budweiser-logo.png"
+      },
+      {
+        name: "Intel",
+        tier: "platinum",
+        logo: "https://example.com/intel-logo.png"
+      }
+    ])
+  },
+
+  'concertatsea2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Concert at SEA 2025",
+    EVENT_DATE: "2025-06-27",
+    EVENT_LOCATION: "Brouwersdam, Zeeland",
+    EVENT_DESCRIPTION: "The Netherlands' largest beach festival returns to the Brouwersdam for three days of music, sun, and sea. Experience the best Dutch and international artists performing against the stunning backdrop of the North Sea.",
+    EVENT_SHORT_DESCRIPTION: "Largest Dutch beach festival",
+    EVENT_TICKETS_URL: "https://tickets.concertatsea2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3",
+    EVENT_TWITTER_HANDLE: "@concertatsea",
+    EVENT_KEYWORDS: "concert at sea, beach festival, dutch music, zeeland, live music, seaside festival",
+    EVENT_ORGANIZER: "BLØF",
+    EVENT_ORGANIZER_URL: "https://concertatsea2025.nl",
+    SITE_URL: "https://concertatsea2025.nl",
+    EVENT_START_TIME: "13:00",
+    EVENT_END_TIME: "00:00",
+    EVENT_CAPACITY: "40000",
+    EVENT_PRICE_FROM: "79",
+    EVENT_EMAIL: "info@concertatsea.nl",
+    EVENT_PHONE: "+31 20 555 0112",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/concert-at-sea",
+    EVENT_TWITTER_URL: "https://twitter.com/concertatsea",
+    EVENT_FACEBOOK_URL: "https://facebook.com/concertatsea",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "BLØF",
+        title: "Dutch Rock Band",
+        company: "Universal Music",
+        image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7"
+      },
+      {
+        name: "Kensington",
+        title: "Dutch Rock Band",
+        company: "Universal Music",
+        image: "https://images.unsplash.com/photo-1524650359799-842906ca1c06"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "13:00",
+        title: "Gates Open",
+        location: "Main Entrance"
+      },
+      {
+        time: "16:00",
+        title: "Beach Activities",
+        location: "Beach Area"
+      },
+      {
+        time: "20:00",
+        title: "Kensington Performance",
+        speaker: "Kensington",
+        location: "Main Stage"
+      },
+      {
+        time: "22:00",
+        title: "BLØF Headline Show",
+        speaker: "BLØF",
+        location: "Main Stage"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Heineken",
+        tier: "presenting",
+        logo: "https://example.com/heineken-logo.png"
+      },
+      {
+        name: "Delta",
+        tier: "gold",
+        logo: "https://example.com/delta-logo.png"
+      }
+    ])
+  },
+
+  'oerol2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Oerol Festival 2025",
+    EVENT_DATE: "2025-06-13",
+    EVENT_LOCATION: "Terschelling, Netherlands",
+    EVENT_DESCRIPTION: "Experience the unique combination of nature, theater, and arts on the island of Terschelling. Oerol transforms the entire island into a stage for innovative theater, music, dance, and visual arts, creating unforgettable performances in natural settings.",
+    EVENT_SHORT_DESCRIPTION: "Theater and arts festival on Terschelling island",
+    EVENT_TICKETS_URL: "https://tickets.oerol2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819",
+    EVENT_TWITTER_HANDLE: "@oerol_nl",
+    EVENT_KEYWORDS: "oerol, theater festival, arts festival, terschelling, cultural events, site-specific theater, netherlands",
+    EVENT_ORGANIZER: "Stichting Oerol",
+    EVENT_ORGANIZER_URL: "https://oerol2025.nl",
+    SITE_URL: "https://oerol2025.nl",
+    EVENT_START_TIME: "10:00",
+    EVENT_END_TIME: "23:00",
+    EVENT_CAPACITY: "50000",
+    EVENT_PRICE_FROM: "45",
+    EVENT_EMAIL: "info@oerol.nl",
+    EVENT_PHONE: "+31 20 555 0113",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/oerol-festival",
+    EVENT_TWITTER_URL: "https://twitter.com/oerol_nl",
+    EVENT_FACEBOOK_URL: "https://facebook.com/oerolfestival",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Theater Rotterdam",
+        title: "Theater Company",
+        company: "Theater Rotterdam",
+        image: "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf"
+      },
+      {
+        name: "Noord Nederlands Toneel",
+        title: "Theater Company",
+        company: "NNT",
+        image: "https://images.unsplash.com/photo-1518834107812-67b0b7c58434"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "10:00",
+        title: "Festival Opens",
+        location: "Various Locations"
+      },
+      {
+        time: "14:00",
+        title: "Beach Performance",
+        location: "North Beach"
+      },
+      {
+        time: "17:00",
+        title: "Forest Theater",
+        location: "Formerum Forest"
+      },
+      {
+        time: "21:00",
+        title: "Evening Spectacle",
+        location: "Harbour"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "BankGiro Loterij",
+        tier: "presenting",
+        logo: "https://example.com/bankgiro-logo.png"
+      },
+      {
+        name: "Prins Bernhard Cultuurfonds",
+        tier: "gold",
+        logo: "https://example.com/cultuurfonds-logo.png"
+      }
+    ])
+  },
+
+  'verknipt2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Verknipt Festival 2025",
+    EVENT_DATE: "2025-07-05",
+    EVENT_LOCATION: "Utrecht, Netherlands",
+    EVENT_DESCRIPTION: "Utrecht's premier techno festival returns with a cutting-edge lineup of international DJs and producers. Experience raw, underground electronic music across multiple stages in an industrial setting with state-of-the-art sound systems.",
+    EVENT_SHORT_DESCRIPTION: "Raw underground techno festival",
+    EVENT_TICKETS_URL: "https://tickets.verknipt2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7",
+    EVENT_TWITTER_HANDLE: "@verknipt",
+    EVENT_KEYWORDS: "verknipt, techno festival, electronic music, utrecht, underground music, warehouse party",
+    EVENT_ORGANIZER: "Verknipt Events",
+    EVENT_ORGANIZER_URL: "https://verknipt2025.nl",
+    SITE_URL: "https://verknipt2025.nl",
+    EVENT_START_TIME: "12:00",
+    EVENT_END_TIME: "23:00",
+    EVENT_CAPACITY: "12000",
+    EVENT_PRICE_FROM: "45",
+    EVENT_EMAIL: "info@verknipt.nl",
+    EVENT_PHONE: "+31 20 555 0114",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/verknipt",
+    EVENT_TWITTER_URL: "https://twitter.com/verknipt",
+    EVENT_FACEBOOK_URL: "https://facebook.com/verknipt",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Paula Temple",
+        title: "Techno Producer",
+        company: "Noise Manifesto",
+        image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819"
+      },
+      {
+        name: "Dax J",
+        title: "Techno DJ",
+        company: "Monnom Black",
+        image: "https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "12:00",
+        title: "Doors Open",
+        location: "Main Area"
+      },
+      {
+        time: "14:00",
+        title: "Opening Sets",
+        location: "All Stages"
+      },
+      {
+        time: "18:00",
+        title: "Paula Temple",
+        speaker: "Paula Temple",
+        location: "Main Stage"
+      },
+      {
+        time: "21:00",
+        title: "Dax J Closing",
+        speaker: "Dax J",
+        location: "Main Stage"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Absolut",
+        tier: "presenting",
+        logo: "https://example.com/absolut-logo.png"
+      },
+      {
+        name: "Pioneer DJ",
+        tier: "gold",
+        logo: "https://example.com/pioneer-logo.png"
+      }
+    ])
+  },
+
+  'thunderdome2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Thunderdome 2025",
+    EVENT_DATE: "2025-10-25",
+    EVENT_LOCATION: "Jaarbeurs, Utrecht",
+    EVENT_DESCRIPTION: "The legendary hardcore event returns for its 2025 edition. Experience the raw power of hardcore, gabber, and industrial music in this intense celebration of the harder styles, featuring spectacular production and the scene's biggest names.",
+    EVENT_SHORT_DESCRIPTION: "Legendary hardcore music festival",
+    EVENT_TICKETS_URL: "https://tickets.thunderdome2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7",
+    EVENT_TWITTER_HANDLE: "@thunderdome",
+    EVENT_KEYWORDS: "thunderdome, hardcore, gabber, industrial music, electronic music, utrecht, harder styles",
+    EVENT_ORGANIZER: "ID&T",
+    EVENT_ORGANIZER_URL: "https://thunderdome2025.nl",
+    SITE_URL: "https://thunderdome2025.nl",
+    EVENT_START_TIME: "22:00",
+    EVENT_END_TIME: "07:00",
+    EVENT_CAPACITY: "25000",
+    EVENT_PRICE_FROM: "65",
+    EVENT_EMAIL: "info@thunderdome.nl",
+    EVENT_PHONE: "+31 20 555 0115",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/thunderdome",
+    EVENT_TWITTER_URL: "https://twitter.com/thunderdome",
+    EVENT_FACEBOOK_URL: "https://facebook.com/thunderdome",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Angerfist",
+        title: "Hardcore DJ",
+        company: "Masters of Hardcore",
+        image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819"
+      },
+      {
+        name: "Paul Elstak",
+        title: "Gabber Legend",
+        company: "Rotterdam Records",
+        image: "https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "22:00",
+        title: "Doors Open",
+        location: "Main Hall"
+      },
+      {
+        time: "00:00",
+        title: "Opening Show",
+        location: "Main Stage"
+      },
+      {
+        time: "02:00",
+        title: "Paul Elstak",
+        speaker: "Paul Elstak",
+        location: "Main Stage"
+      },
+      {
+        time: "04:00",
+        title: "Angerfist",
+        speaker: "Angerfist",
+        location: "Main Stage"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Monster Energy",
+        tier: "presenting",
+        logo: "https://example.com/monster-logo.png"
+      },
+      {
+        name: "Q-Dance",
+        tier: "platinum",
+        logo: "https://example.com/qdance-logo.png"
+      }
+    ])
+  },
+
+  'defqon2025.nl': {
+    ...commonConfig,
+    EVENT_NAME: "Defqon.1 2025",
+    EVENT_DATE: "2025-06-27",
+    EVENT_LOCATION: "Biddinghuizen, Netherlands",
+    EVENT_DESCRIPTION: "The world's largest harder styles music festival returns to Biddinghuizen. Experience four days of hardstyle, hardcore, and raw style music across multiple stages, featuring spectacular shows, fireworks, and the legendary endshow.",
+    EVENT_SHORT_DESCRIPTION: "Ultimate harder styles music festival",
+    EVENT_TICKETS_URL: "https://tickets.defqon2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7",
+    EVENT_TWITTER_HANDLE: "@defqon",
+    EVENT_KEYWORDS: "defqon.1, hardstyle, hardcore, raw style, music festival, q-dance, harder styles",
+    EVENT_ORGANIZER: "Q-Dance",
+    EVENT_ORGANIZER_URL: "https://defqon2025.nl",
+    SITE_URL: "https://defqon2025.nl",
+    EVENT_START_TIME: "11:00",
+    EVENT_END_TIME: "23:00",
+    EVENT_CAPACITY: "150000",
+    EVENT_PRICE_FROM: "199",
+    EVENT_EMAIL: "info@defqon.nl",
+    EVENT_PHONE: "+31 20 555 0116",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/q-dance",
+    EVENT_TWITTER_URL: "https://twitter.com/defqon",
+    EVENT_FACEBOOK_URL: "https://facebook.com/defqon1",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Headhunterz",
+        title: "Hardstyle Legend",
+        company: "Art of Creation",
+        image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819"
+      },
+      {
+        name: "Brennan Heart",
+        title: "Hardstyle Producer",
+        company: "I AM HARDSTYLE",
+        image: "https://images.unsplash.com/photo-1509824227185-9c5a01ceba0d"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "11:00",
+        title: "Festival Opens",
+        location: "Festival Grounds"
+      },
+      {
+        time: "14:00",
+        title: "Power Hour",
+        location: "RED Stage"
+      },
+      {
+        time: "19:00",
+        title: "Headhunterz",
+        speaker: "Headhunterz",
+        location: "RED Stage"
+      },
+      {
+        time: "22:30",
+        title: "The Endshow",
+        location: "RED Stage"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Q-Dance",
+        tier: "presenting",
+        logo: "https://example.com/qdance-logo.png"
+      },
+      {
+        name: "Monster Energy",
+        tier: "platinum",
+        logo: "https://example.com/monster-logo.png"
+      }
+    ])
+  }
+};
 
 // Default event configuration (fallback)
 export const defaultEvent = events['ade2025.nl'];
