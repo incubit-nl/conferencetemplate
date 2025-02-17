@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Analytics } from '@vercel/analytics/react';
 import { getEnvVars } from '@/lib/env';
 import { Toaster } from '@/components/ui/toaster';
 
@@ -193,7 +192,6 @@ export default async function RootLayout({
         </footer>
         
         <Toaster />
-        <Analytics />
       </body>
     </html>
   );
