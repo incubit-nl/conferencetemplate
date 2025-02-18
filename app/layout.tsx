@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       default: title,
       template: `%s | ${shortTitle}`,
     },
-    description: env.EVENT_DESCRIPTION,
+    description: env.EVENT_NAME + env.EVENT_DESCRIPTION,
     keywords: env.EVENT_KEYWORDS.split(',').map(k => k.trim()),
     authors: [
       { name: env.EVENT_ORGANIZER, url: env.EVENT_ORGANIZER_URL },
