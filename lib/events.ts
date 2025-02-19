@@ -2082,6 +2082,75 @@ export const events: Record<string, EventConfig> = {
     ])
   },
 
+  'utrecht2025.nl':{
+    ...commonConfig,
+    EVENT_NAME: "Utrecht International Film Festival 2025",
+    EVENT_DATE: "2025-09-20",
+    EVENT_LOCATION: "Various Venues, Utrecht, Netherlands",
+    EVENT_DESCRIPTION: "Discover the best in international cinema at the Utrecht International Film Festival 2025. Featuring premieres, retrospectives, and special events across Utrecht's historic theaters and cultural venues. Join filmmakers, industry professionals, and film enthusiasts for a week of screenings, talks, and celebrations.",
+    EVENT_SHORT_DESCRIPTION: "Celebrating international cinema in Utrecht",
+    EVENT_TICKETS_URL: "https://tickets.utrecht2025.nl",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1521737711862-5f0f5c9d3c2e",
+    EVENT_TWITTER_HANDLE: "@utrechtfilm",
+    EVENT_KEYWORDS: "film festival, utrecht, cinema, movies, international film, independent film, netherlands",
+    EVENT_ORGANIZER: "Utrecht Film Foundation",
+    EVENT_ORGANIZER_URL: "https://utrecht2025.nl",
+    SITE_URL: "https://utrecht2025.nl",
+    EVENT_START_TIME: "10:00",
+    EVENT_END_TIME: "23:00",
+    EVENT_CAPACITY: "50000",
+    EVENT_PRICE_FROM: "15",
+    EVENT_EMAIL: "info@utrecht2025.nl",
+    EVENT_PHONE: "+31 20 555 0107",
+    EVENT_LINKEDIN_URL: "https://linkedin.com/company/utrecht-film-festival",
+    EVENT_TWITTER_URL: "https://twitter.com/utrechtfilm",
+    EVENT_FACEBOOK_URL: "https://facebook.com/utrechtfilm",
+    EVENT_SPEAKERS: JSON.stringify([
+      {
+        name: "Agnès Varda",
+        title: "French Filmmaker",
+        company: "Ciné-Tamaris",
+        image: "https://images.unsplash.com/photo-1521737711862-5f0f5c9d3c2e"
+      },
+      {
+        name: "Barry Jenkins",
+        title: "American Director",
+        company: "A24",
+        image: "https://images.unsplash.com/photo-1521737711862-5f0f5c9d3c2e"
+      }
+    ]),
+    EVENT_SCHEDULE: JSON.stringify([
+      {
+        time: "10:00",
+        title: "Festival Opens",
+        location: "Louis Hartlooper Complex"
+      },
+      {
+        time: "14:00",
+        title: "Director's Panel",
+        location: "TivoliVredenburg"
+      },
+      {
+        time: "20:00",
+        title: "Opening Night Film",
+        speaker: "Agnès Varda",
+        location: "Springhaver Theater"
+      }
+    ]),
+    EVENT_SPONSORS: JSON.stringify([
+      {
+        name: "Netflix",
+        tier: "platinum",
+        logo: "https://example.com/netflix-logo.png"
+      },
+      {
+        name: "Pathe",
+        tier: "gold",
+        logo: "https://example.com/pathe-logo.png"
+      }
+    ])
+  },
+
   'zwartecross2025.nl': {
     ...commonConfig,
     EVENT_NAME: "Zwarte Cross 2025",
