@@ -13,25 +13,23 @@ export function Navbar() {
   const [currentEvent, setCurrentEvent] = useState<any>(null);
   const { toast } = useToast();
 
+  useEffect(() => {
+    const loadEventData = async () => {
+      try {
+        const env = await getEnvVars();
+        setCurrentEvent(env);
+      } catch (error) {
+        console.error('Error loading event data:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to load event data. Please try again.',
+          variant: 'destructive',
+        });
+      }
+    };
 
-    useEffect(() => {
-      const loadEventData = async () => {
-        try {
-          const env = await getEnvVars();
-          setCurrentEvent(env);
-        } catch (error) {
-          console.error('Error loading event data:', error);
-          toast({
-            title: 'Error',
-            description: 'Failed to load event data. Please try again.',
-            variant: 'destructive',
-          });
-        }
-      };
-  
-      loadEventData();
-    }, [toast]);
-
+    loadEventData();
+  }, [toast]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b">
@@ -55,6 +53,12 @@ export function Navbar() {
               className="brutal-text text-sm hover:text-primary transition-colors"
             >
               Tips
+            </Link>
+            <Link 
+              href="/contact" 
+              className="brutal-text text-sm hover:text-primary transition-colors"
+            >
+              Contact
             </Link>
           </div>
 
@@ -89,6 +93,13 @@ export function Navbar() {
                 className="brutal-button p-2 text-center"
               >
                 Tips
+              </Link>
+              <Link 
+                href="/contact"
+                onClick={() => setIsOpen(false)}
+                className="brutal-button p-2 text-center"
+              >
+                Contact
               </Link>
             </div>
           </div>
