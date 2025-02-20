@@ -1,12 +1,5 @@
-'use client';
-
-import { PDFDocument, StandardFonts, rgb, degrees } from 'pdf-lib';
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { PrismaClient } from '@prisma/client';
-import { getEnvVars } from '@/lib/env';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useToast } from '@/hooks/use-toast';
-
 
 const prisma = new PrismaClient();
 
@@ -16,6 +9,7 @@ interface ChecklistOptions {
   isDayTrip: boolean;
   isFirstTimer: boolean;
   isBudget: boolean;
+  siteUrl?: string;
 }
 
 interface ChecklistSection {
@@ -27,8 +21,6 @@ export async function generateChecklist(options: ChecklistOptions) {
   const pdfDoc = await PDFDocument.create();
   const page = pdfDoc.addPage([800, 1100]); // Larger page size
   const { width, height } = page.getSize();
-  const [currentEvent, setCurrentEvent] = useState<any>(null);
-  const { toast } = useToast();
   
   // Embed fonts
   const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
@@ -47,105 +39,88 @@ export async function generateChecklist(options: ChecklistOptions) {
     },
   });
 
-    useEffect(() => {
-        const loadEventData = async () => {
-            try {
-                const env = await getEnvVars();
-                setCurrentEvent(env);
-            } catch (error) {
-                console.error('Error loading event data:', error);
-                toast({
-                    title: 'Error',
-                    description: 'Failed to load event data. Please try again.',
-                    variant: 'destructive',
-                });
-            }
-        };
-        loadEventData();
-    }, [toast]);
-
-// Define sections with items
-const sections: ChecklistSection[] = [
+  // Define sections with items
+  const sections: ChecklistSection[] = [
     {
-        title: 'Essential Items',
-        items: [
-            'Tickets and ID',
-            'Credit/Debit Cards & Cash',
-            'Phone and Charger',
-            'Portable Battery Pack',
-            'Reusable Water Bottle',
-            'Sunscreen (SPF 30+)',
-            'Sunglasses',
-            'Hat or Cap',
-            'Hand Sanitizer',
-        ]
+      title: 'Essential Items',
+      items: [
+        'Tickets and ID',
+        'Credit/Debit Cards & Cash',
+        'Phone and Charger',
+        'Portable Battery Pack',
+        'Reusable Water Bottle',
+        'Sunscreen (SPF 30+)',
+        'Sunglasses',
+        'Hat or Cap',
+        'Hand Sanitizer',
+      ]
     },
     {
-        title: options.isCamping ? 'Camping Essentials' : 'Comfort Items',
-        items: options.isCamping ? [
-            'Tent & Stakes',
-            'Sleeping Bag & Pillow',
-            'Camping Chair',
-            'Flashlight/Headlamp',
-            'Extra Batteries',
-            'Basic Tool Kit',
-            'Bug Spray',
-            'Cooler',
-            'Toilet Paper'
-        ] : [
-            'Comfortable Backpack',
-            'Light Jacket/Sweater',
-            'Compact Umbrella',
-            'Extra Layer of Clothing',
-            'Travel-size Toiletries'
-        ]
+      title: options.isCamping ? 'Camping Essentials' : 'Comfort Items',
+      items: options.isCamping ? [
+        'Tent & Stakes',
+        'Sleeping Bag & Pillow',
+        'Camping Chair',
+        'Flashlight/Headlamp',
+        'Extra Batteries',
+        'Basic Tool Kit',
+        'Bug Spray',
+        'Cooler',
+        'Toilet Paper'
+      ] : [
+        'Comfortable Backpack',
+        'Light Jacket/Sweater',
+        'Compact Umbrella',
+        'Extra Layer of Clothing',
+        'Travel-size Toiletries'
+      ]
     },
     {
-        title: options.isDayTrip ? 'Day Trip Essentials' : 'Multi-Day Necessities',
-        items: options.isDayTrip ? [
-            'Day Pack',
-            'Snacks',
-            'Travel-size Sunscreen',
-            'Basic First Aid',
-            'Portable Charger'
-        ] : [
-            'Multiple Changes of Clothes',
-            'Full Toiletries Kit',
-            'Laundry Bag',
-            'First Aid Kit',
-            'Any Required Medications',
-            'Locker Lock',
-            'Extra Socks & Underwear'
-        ]
+      title: options.isDayTrip ? 'Day Trip Essentials' : 'Multi-Day Necessities',
+      items: options.isDayTrip ? [
+        'Day Pack',
+        'Snacks',
+        'Travel-size Sunscreen',
+        'Basic First Aid',
+        'Portable Charger'
+      ] : [
+        'Multiple Changes of Clothes',
+        'Full Toiletries Kit',
+        'Laundry Bag',
+        'First Aid Kit',
+        'Any Required Medications',
+        'Locker Lock',
+        'Extra Socks & Underwear'
+      ]
     }
-];
+  ];
 
-if (options.isFirstTimer) {
+  if (options.isFirstTimer) {
     sections.push({
-        title: 'First Timer Tips',
-        items: [
-            'Download Festival Map',
-            'Install Festival App',
-            'Write Down Emergency Contacts',
-            'Save Meeting Points',
-            'Check Set Times',
-            'Read Festival Rules'
-        ]
+      title: 'First Timer Tips',
+      items: [
+        'Download Festival Map',
+        'Install Festival App',
+        'Write Down Emergency Contacts',
+        'Save Meeting Points',
+        'Check Set Times',
+        'Read Festival Rules'
+      ]
     });
-}
+  }
 
-if (!options.isBudget) {
+  if (!options.isBudget) {
     sections.push({
-        title: 'Comfort Upgrades',
-        items: [
-            'Portable Fan',
-            'Premium Rain Gear',
-            'Inflatable Lounger',
-            'Cooling Towel',
-            'High-Capacity Power Bank'
-        ]
+      title: 'Comfort Upgrades',
+      items: [
+        'Portable Fan',
+        'Premium Rain Gear',
+        'Inflatable Lounger',
+        'Cooling Towel',
+        'High-Capacity Power Bank'
+      ]
     });
-}
+  }
 
   // Draw header
   page.drawText(options.eventName, {
@@ -163,6 +138,17 @@ if (!options.isBudget) {
     font: helveticaBold,
     color: rgb(0.4, 0.4, 0.4)
   });
+
+  // Draw event URL if available
+  if (options.siteUrl) {
+    page.drawText(`Event Website: ${options.siteUrl}`, {
+      x: 50,
+      y: height - 100,
+      size: 10,
+      font: helvetica,
+      color: rgb(0.2, 0.2, 0.8)
+    });
+  }
 
   // Draw sections
   let currentY = height - 130;
@@ -239,7 +225,7 @@ if (!options.isBudget) {
   }
 
   // Add footer
-const footerText = `Generated by ${currentEvent.SITE_URL} • Save & Share Your List!`;
+  const footerText = `Generated for ${options.eventName} • Save & Share Your List!`;
   const footerWidth = helvetica.widthOfTextAtSize(footerText, 10);
   
   page.drawText(footerText, {

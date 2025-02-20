@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import Stripe from 'stripe';
 import { generateChecklist } from '@/lib/checklist';
 import { verifyRecaptcha } from '@/lib/recaptcha';
+import { events } from '@/lib/events';
 
 const prisma = new PrismaClient();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -31,6 +32,10 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+
+    // Get event URL from events configuration
+    const eventConfig = Object.values(events).find(event => event.EVENT_NAME === eventName);
+    const siteUrl = eventConfig?.SITE_URL;
 
     // Verify reCAPTCHA token
     console.log('Verifying reCAPTCHA...');
@@ -88,6 +93,7 @@ export async function POST(req: Request) {
         isDayTrip,
         isFirstTimer,
         isBudget,
+        siteUrl,
       });
 
       console.log('Checklist generated:', checklist);
