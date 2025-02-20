@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import Stripe from 'stripe';
 import { generateChecklist } from '@/lib/checklist';
+import { verifyRecaptcha } from '@/lib/recaptcha';
 
 const prisma = new PrismaClient();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -16,7 +17,17 @@ export async function POST(req: Request) {
       isDayTrip,
       isFirstTimer,
       isBudget,
+      recaptchaToken,
     } = await req.json();
+
+    // Verify reCAPTCHA token
+    const isValidRecaptcha = await verifyRecaptcha(recaptchaToken);
+    if (!isValidRecaptcha) {
+      return NextResponse.json(
+        { error: 'Invalid reCAPTCHA verification' },
+        { status: 400 }
+      );
+    }
 
     // Check if payment is required
     const paymentSetting = await prisma.paymentSetting.findFirst();

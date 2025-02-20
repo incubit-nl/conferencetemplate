@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { getEnvVars } from '@/lib/env';
 import { Tent, Sun, Calendar, CreditCard, HelpCircle } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 interface FormData {
     eventName: string;
@@ -20,13 +21,14 @@ interface FormData {
     isBudget: string;
 }
 
-export default function ChecklistPage() {
+function ChecklistForm() {
     const [loading, setLoading] = useState(false);
     const [currentEvent, setCurrentEvent] = useState<any>(null);
     const [paymentsEnabled, setPaymentsEnabled] = useState(true);
+    const { executeRecaptcha } = useGoogleReCaptcha();
     const { toast } = useToast();
     const router = useRouter();
-    const { register, handleSubmit, watch } = useForm<FormData>();
+    const { register, handleSubmit } = useForm<FormData>();
 
     useEffect(() => {
         const loadEventData = async () => {
@@ -67,8 +69,21 @@ export default function ChecklistPage() {
             return;
         }
 
+        if (!executeRecaptcha) {
+            toast({
+                title: 'Error',
+                description: 'reCAPTCHA not initialized',
+                variant: 'destructive',
+            });
+            return;
+        }
+
         try {
             setLoading(true);
+            
+            // Execute reCAPTCHA
+            const recaptchaToken = await executeRecaptcha('checklist_submit');
+            
             const response = await fetch('/api/checklist', {
                 method: 'POST',
                 headers: {
@@ -81,10 +96,15 @@ export default function ChecklistPage() {
                     isDayTrip: data.isDayTrip === 'true',
                     isFirstTimer: data.isFirstTimer === 'true',
                     isBudget: data.isBudget === 'true',
+                    recaptchaToken,
                 }),
             });
 
             const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || 'Failed to generate checklist');
+            }
 
             if (result.url) {
                 window.location.href = result.url;
@@ -250,14 +270,22 @@ export default function ChecklistPage() {
                 </Card>
                 
                 <div className="text-center mt-8">
-                <Button 
+                    <Button 
                         onClick={() => router.push('/')} 
                         className="bg-[#FFD600] hover:bg-[#FFD600]/90 text-black brutal-border border-[#FFD600]"
-                        >
+                    >
                         Back to Home
-                </Button>
+                    </Button>
                 </div>
             </div>
         </TooltipProvider>
+    );
+}
+
+export default function ChecklistPage() {
+    return (
+        <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>
+            <ChecklistForm />
+        </GoogleReCaptchaProvider>
     );
 }

@@ -175,9 +175,8 @@ export default async function RootLayout({
         </main>
 
         <footer
-          className="fixed bottom-0 w-full bg-background/80 backdrop-blur-sm border-t py-4 transition-opacity duration-5000"
+          className="fixed bottom-0 w-full bg-background/80 backdrop-blur-sm border-t py-4 transition-opacity"
           style={{ opacity: 1 }}
-          onAnimationEnd={(e) => (e.currentTarget.style.opacity = '0')}
         >
           <div className="container mx-auto text-center">
             <p className="text-sm mb-1">

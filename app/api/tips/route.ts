@@ -1,16 +1,26 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { verifyRecaptcha } from '@/lib/recaptcha';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
-    const { eventName, tip, authorHandle } = await req.json();
+    const { eventName, tip, authorHandle, recaptchaToken } = await req.json();
 
     // Basic validation
     if (!eventName || !tip) {
       return NextResponse.json(
         { error: 'Event name and tip are required' },
+        { status: 400 }
+      );
+    }
+
+    // Verify reCAPTCHA token
+    const isValidRecaptcha = await verifyRecaptcha(recaptchaToken);
+    if (!isValidRecaptcha) {
+      return NextResponse.json(
+        { error: 'Invalid reCAPTCHA verification' },
         { status: 400 }
       );
     }
