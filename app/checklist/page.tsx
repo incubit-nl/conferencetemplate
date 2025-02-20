@@ -7,9 +7,10 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { getEnvVars } from '@/lib/env';
+import { Tent, Sun, Calendar, CreditCard, HelpCircle } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface FormData {
   eventName: string;
@@ -21,21 +22,27 @@ interface FormData {
 
 export default function ChecklistPage() {
   const [loading, setLoading] = useState(false);
-  const [events, setEvents] = useState<any[]>([]);
+  const [currentEvent, setCurrentEvent] = useState<any>(null);
   const [paymentsEnabled, setPaymentsEnabled] = useState(true);
   const { toast } = useToast();
   const router = useRouter();
   const { register, handleSubmit, watch } = useForm<FormData>();
 
   useEffect(() => {
-    const loadEvents = async () => {
-      const env = await getEnvVars();
-      // Extract events from env
-      // This would depend on your events structure
+    const loadEventData = async () => {
+      try {
+        const env = await getEnvVars();
+        setCurrentEvent(env);
+      } catch (error) {
+        console.error('Error loading event data:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to load event data. Please try again.',
+          variant: 'destructive',
+        });
+      }
     };
-    loadEvents();
 
-    // Check payment settings
     const checkPaymentSettings = async () => {
       try {
         const response = await fetch('/api/payment-settings');
@@ -45,10 +52,21 @@ export default function ChecklistPage() {
         console.error('Error checking payment settings:', error);
       }
     };
+
+    loadEventData();
     checkPaymentSettings();
-  }, []);
+  }, [toast]);
 
   const onSubmit = async (data: FormData) => {
+    if (!currentEvent?.EVENT_NAME) {
+      toast({
+        title: 'Error',
+        description: 'Please wait for event data to load.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     try {
       setLoading(true);
       const response = await fetch('/api/checklist', {
@@ -58,6 +76,7 @@ export default function ChecklistPage() {
         },
         body: JSON.stringify({
           ...data,
+          eventName: currentEvent.EVENT_NAME,
           isCamping: data.isCamping === 'true',
           isDayTrip: data.isDayTrip === 'true',
           isFirstTimer: data.isFirstTimer === 'true',
@@ -68,10 +87,8 @@ export default function ChecklistPage() {
       const result = await response.json();
 
       if (result.url) {
-        // Redirect to Stripe Checkout
         window.location.href = result.url;
       } else if (result.downloadUrl) {
-        // Direct download (free mode)
         const link = document.createElement('a');
         link.href = result.downloadUrl;
         link.download = result.fileName;
@@ -81,7 +98,7 @@ export default function ChecklistPage() {
         
         toast({
           title: 'Success!',
-          description: 'Your checklist has been generated.',
+          description: 'Your personalized checklist is ready. Check your downloads!',
         });
       }
     } catch (error) {
@@ -96,97 +113,138 @@ export default function ChecklistPage() {
     }
   };
 
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8">Festival Packing Checklist</h1>
-      
-      <div className="text-center mb-8">
-        <p className="text-lg">
-          {paymentsEnabled
-            ? 'Get your custom packing checklist for just $2.99—built with tips from festival pros like you!'
-            : 'Get your free custom packing checklist—built with tips from festival pros like you!'}
-        </p>
+  if (!currentEvent) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <Card className="max-w-2xl mx-auto p-6 text-center">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 rounded w-3/4 mx-auto mb-4"></div>
+            <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+          </div>
+        </Card>
       </div>
-      
-      <Card className="max-w-2xl mx-auto p-6">
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-4">
-            <Label>Select Event</Label>
-            <Select onValueChange={(value) => register('eventName').onChange({ target: { value } })}>
-              <SelectTrigger>
-                <SelectValue placeholder="Choose an event" />
-              </SelectTrigger>
-              <SelectContent>
-                {events.map((event) => (
-                  <SelectItem key={event.name} value={event.name}>
-                    {event.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+    );
+  }
+
+  return (
+    <TooltipProvider>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-center mb-4">Festival Packing Checklist</h1>
+        
+        <div className="text-center mb-8">
+          <p className="text-lg mb-2">
+            {paymentsEnabled
+              ? 'Get your custom packing checklist for just $2.99'
+              : 'Get your free custom packing checklist'}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Personalized for your festival experience with pro tips from experienced attendees
+          </p>
+        </div>
+        
+        <Card className="max-w-2xl mx-auto p-6">
+          <div className="mb-6 brutal-border p-4 bg-secondary">
+            <h2 className="text-xl font-bold mb-2">{currentEvent.EVENT_NAME}</h2>
+            <p className="text-sm text-muted-foreground">{currentEvent.EVENT_DESCRIPTION}</p>
           </div>
 
-          <div className="space-y-4">
-            <Label>Are you camping?</Label>
-            <RadioGroup defaultValue="false" onValueChange={(value) => register('isCamping').onChange({ target: { value } })}>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="true" id="camping-yes" />
-                <Label htmlFor="camping-yes">Yes</Label>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Tent className="h-5 w-5" />
+                <Label>Are you camping?</Label>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Choose camping for tent-specific packing items</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="false" id="camping-no" />
-                <Label htmlFor="camping-no">No</Label>
-              </div>
-            </RadioGroup>
-          </div>
+              <RadioGroup defaultValue="false" onValueChange={(value) => register('isCamping').onChange({ target: { value } })} className="grid grid-cols-2 gap-4">
+                <div className="brutal-border p-4 [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-primary-foreground">
+                  <RadioGroupItem value="true" id="camping-yes" className="sr-only" />
+                  <Label htmlFor="camping-yes" className="block text-center cursor-pointer">Yes, I&apos;m camping</Label>
+                </div>
+                <div className="brutal-border p-4 [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-primary-foreground">
+                  <RadioGroupItem value="false" id="camping-no" className="sr-only" />
+                  <Label htmlFor="camping-no" className="block text-center cursor-pointer">No camping</Label>
+                </div>
+              </RadioGroup>
+            </div>
 
-          <div className="space-y-4">
-            <Label>Day trip or multi-day?</Label>
-            <RadioGroup defaultValue="day" onValueChange={(value) => register('isDayTrip').onChange({ target: { value } })}>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="true" id="day-trip" />
-                <Label htmlFor="day-trip">Day Trip</Label>
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-5 w-5" />
+                <Label>Trip Duration</Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="false" id="multi-day" />
-                <Label htmlFor="multi-day">Multi-day</Label>
-              </div>
-            </RadioGroup>
-          </div>
+              <RadioGroup defaultValue="true" onValueChange={(value) => register('isDayTrip').onChange({ target: { value } })} className="grid grid-cols-2 gap-4">
+                <div className="brutal-border p-4 [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-primary-foreground">
+                  <RadioGroupItem value="true" id="day-trip" className="sr-only" />
+                  <Label htmlFor="day-trip" className="block text-center cursor-pointer">Day Trip</Label>
+                </div>
+                <div className="brutal-border p-4 [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-primary-foreground">
+                  <RadioGroupItem value="false" id="multi-day" className="sr-only" />
+                  <Label htmlFor="multi-day" className="block text-center cursor-pointer">Multiple Days</Label>
+                </div>
+              </RadioGroup>
+            </div>
 
-          <div className="space-y-4">
-            <Label>First timer?</Label>
-            <RadioGroup defaultValue="false" onValueChange={(value) => register('isFirstTimer').onChange({ target: { value } })}>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="true" id="first-yes" />
-                <Label htmlFor="first-yes">Yes</Label>
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <HelpCircle className="h-5 w-5" />
+                <Label>First Festival?</Label>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="false" id="first-no" />
-                <Label htmlFor="first-no">No</Label>
-              </div>
-            </RadioGroup>
-          </div>
+              <RadioGroup defaultValue="false" onValueChange={(value) => register('isFirstTimer').onChange({ target: { value } })} className="grid grid-cols-2 gap-4">
+                <div className="brutal-border p-4 [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-primary-foreground">
+                  <RadioGroupItem value="true" id="first-yes" className="sr-only" />
+                  <Label htmlFor="first-yes" className="block text-center cursor-pointer">Yes, first time!</Label>
+                </div>
+                <div className="brutal-border p-4 [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-primary-foreground">
+                  <RadioGroupItem value="false" id="first-no" className="sr-only" />
+                  <Label htmlFor="first-no" className="block text-center cursor-pointer">Experienced</Label>
+                </div>
+              </RadioGroup>
+            </div>
 
-          <div className="space-y-4">
-            <Label>Budget or bougie?</Label>
-            <RadioGroup defaultValue="true" onValueChange={(value) => register('isBudget').onChange({ target: { value } })}>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="true" id="budget" />
-                <Label htmlFor="budget">Budget</Label>
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <CreditCard className="h-5 w-5" />
+                <Label>Packing Style</Label>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <HelpCircle className="h-4 w-4 text-muted-foreground" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Choose budget for essential items or bougie for premium comfort items</p>
+                  </TooltipContent>
+                </Tooltip>
               </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="false" id="bougie" />
-                <Label htmlFor="bougie">Bougie</Label>
-              </div>
-            </RadioGroup>
-          </div>
+              <RadioGroup defaultValue="true" onValueChange={(value) => register('isBudget').onChange({ target: { value } })} className="grid grid-cols-2 gap-4">
+                <div className="brutal-border p-4 [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-primary-foreground">
+                  <RadioGroupItem value="true" id="budget" className="sr-only" />
+                  <Label htmlFor="budget" className="block text-center cursor-pointer">Budget-Friendly</Label>
+                </div>
+                <div className="brutal-border p-4 [&:has([data-state=checked])]:bg-primary [&:has([data-state=checked])]:text-primary-foreground">
+                  <RadioGroupItem value="false" id="bougie" className="sr-only" />
+                  <Label htmlFor="bougie" className="block text-center cursor-pointer">Premium Comfort</Label>
+                </div>
+              </RadioGroup>
+            </div>
 
-          <Button type="submit" className="w-full" disabled={loading}>
-            {loading ? 'Generating...' : paymentsEnabled ? 'Generate Checklist ($2.99)' : 'Generate Free Checklist'}
-          </Button>
-        </form>
-      </Card>
-    </div>
+            <Button type="submit" className="w-full h-12 text-lg" disabled={loading}>
+              {loading ? 'Creating Your Checklist...' : paymentsEnabled ? 'Generate Checklist ($2.99)' : 'Generate Free Checklist'}
+            </Button>
+
+            {paymentsEnabled && (
+              <p className="text-center text-sm text-muted-foreground">
+                Secure payment powered by Stripe
+              </p>
+            )}
+          </form>
+        </Card>
+      </div>
+    </TooltipProvider>
   );
 }
