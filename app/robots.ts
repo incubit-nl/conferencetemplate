@@ -1,15 +1,9 @@
 import { MetadataRoute } from 'next';
 import { events } from '@/lib/events';
 
-export default async function robots(): Promise<MetadataRoute.Robots> {
-  // Get all event domains
+export default function robots(): MetadataRoute.Robots {
   const eventDomains = Object.keys(events);
-  const sitemaps: string[] = [];
-
-  // Generate sitemap URLs for each domain
-  eventDomains.forEach(domain => {
-    sitemaps.push(`https://${domain}/sitemap.xml`);
-  });
+  const sitemaps = eventDomains.map(domain => `https://${domain}/sitemap.xml`);
 
   return {
     rules: [
