@@ -72,7 +72,7 @@ function ChecklistForm() {
         if (!executeRecaptcha) {
             toast({
                 title: 'Error',
-                description: 'reCAPTCHA not initialized',
+                description: 'reCAPTCHA not initialized. Please refresh the page.',
                 variant: 'destructive',
             });
             return;
@@ -283,8 +283,21 @@ function ChecklistForm() {
 }
 
 export default function ChecklistPage() {
+    const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    
+    if (!siteKey) {
+        return (
+            <div className="container mx-auto px-4 py-8">
+                <Card className="max-w-2xl mx-auto p-6 text-center">
+                    <h1 className="text-2xl font-bold mb-4">Configuration Error</h1>
+                    <p>reCAPTCHA site key is not configured. Please check your environment variables.</p>
+                </Card>
+            </div>
+        );
+    }
+
     return (
-        <GoogleReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}>
+        <GoogleReCaptchaProvider reCaptchaKey={siteKey}>
             <ChecklistForm />
         </GoogleReCaptchaProvider>
     );
