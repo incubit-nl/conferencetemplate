@@ -1,23 +1,21 @@
 import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { getEnvVars } from '@/lib/env';
 import { Toaster } from '@/components/ui/toaster';
+import { Navbar } from '@/components/NavBar';
+import Footer from '@/components/Footer'; // Direct import, no dynamic needed
 
 const inter = Inter({ 
   subsets: ['latin'],
-  display: 'swap', // Optimize font loading
+  display: 'swap',
   preload: true
 });
 
 export async function generateMetadata(): Promise<Metadata> {
   const env = await getEnvVars();
-  
-  // Create a clean title without the year
   const baseTitle = env.EVENT_NAME.replace(/\s*\d{4}$/, '');
   const year = new Date(env.EVENT_DATE).getFullYear();
-  
-  // Construct SEO-friendly title variations
   const title = `${baseTitle} ${year}`;
   const shortTitle = baseTitle;
   
@@ -31,7 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: env.EVENT_KEYWORDS.split(',').map(k => k.trim()),
     authors: [
       { name: env.EVENT_ORGANIZER, url: env.EVENT_ORGANIZER_URL },
-      { name: 'Incubit.nl', url: 'https://incubit.nl' }
+      { name: 'Incubit.io', url: 'https://incubit.io' }
     ],
     creator: env.EVENT_ORGANIZER,
     publisher: env.EVENT_ORGANIZER,
@@ -84,18 +82,19 @@ export async function generateMetadata(): Promise<Metadata> {
     category: 'event',
     applicationName: shortTitle,
     referrer: 'origin-when-cross-origin',
-    colorScheme: 'dark light',
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-      maximumScale: 5,
-    },
-    themeColor: [
-      { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-      { media: '(prefers-color-scheme: dark)', color: '#000000' },
-    ],
   };
 }
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
+  colorScheme: 'dark light',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export default async function RootLayout({
   children,
@@ -155,15 +154,17 @@ export default async function RootLayout({
           Skip to main content
         </a>
         
-        <div className="brutal-border bg-white dark:bg-black p-4 text-center text-sm">
+        <Navbar />
+        
+        <div className="brutal-border bg-white dark:bg-black p-4 text-center text-sm mt-16">
           <strong>Disclaimer:</strong> This is an unofficial event website created by{' '}
           <a 
-            href="https://incubit.nl" 
+            href="https://incubit.io" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="underline hover:text-primary"
           >
-            Incubit.nl
+            Incubit.io
           </a>
           . We are not affiliated with the event organizers.
         </div>
@@ -172,25 +173,7 @@ export default async function RootLayout({
           {children}
         </main>
 
-        <footer className="fixed bottom-0 w-full bg-background/80 backdrop-blur-sm border-t py-4">
-          <div className="container mx-auto text-center">
-            <p className="text-sm mb-1">
-              Website crafted by{' '}
-              <a
-                href="https://incubit.nl"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-bold hover:underline"
-              >
-                Incubit.nl
-              </a>
-            </p>
-            <p className="text-xs text-muted-foreground">
-              Leading Dutch Digital Agency | Custom Web Development & Design
-            </p>
-          </div>
-        </footer>
-        
+        <Footer />
         <Toaster />
       </body>
     </html>

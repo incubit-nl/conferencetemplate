@@ -6,9 +6,8 @@ Disallow: /_next/*
 Disallow: /static/*
 
 # Host
-Host: https://your-domain.com
+Host: https://ade2025.nl
 
 # Sitemaps
-Sitemap: https://your-domain.com/sitemap.xml
-Sitemap: undefined/sitemap.xml
-Sitemap: undefined/server-sitemap.xml
+Sitemap: https://ade2025.nl/sitemap.xml
+Sitemap: https://ade2025.nl/server-sitemap.xml
