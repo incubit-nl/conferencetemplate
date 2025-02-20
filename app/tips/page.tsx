@@ -2,15 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { getEnvVars } from '@/lib/env';
-
+import { Lightbulb } from 'lucide-react';
+import { useRouter } from 'next/navigation'; // Updated import to match the example
 
 interface TipFormData {
   eventName: string;
@@ -18,54 +17,53 @@ interface TipFormData {
   authorHandle: string;
 }
 
-function TipsPageContent() {
+export default function TipsPage() {
   const [loading, setLoading] = useState(false);
   const [tips, setTips] = useState<any[]>([]);
-  const [selectedEvent, setSelectedEvent] = useState<string>('');
-  const [eventsList, setEventsList] = useState<Array<{ id: string; name: string }>>([]);
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  const [currentEvent, setCurrentEvent] = useState<any>(null);
   const { toast } = useToast();
   const { register, handleSubmit, reset } = useForm<TipFormData>();
-  const [currentEvent, setCurrentEvent] = useState<any>(null);
-
-
-useEffect(() => {
-    const loadEventData = async () => {
-        try {
-            const env = await getEnvVars();
-            setCurrentEvent(env);
-        } catch (error) {
-            console.error('Error loading event data:', error);
-            toast({
-                title: 'Error',
-                description: 'Failed to load event data. Please try again.',
-                variant: 'destructive',
-            });
-        }
-    };
-    loadEventData();
-}, []);
+  const router = useRouter();
 
   useEffect(() => {
-    const loadTips = async () => {
-      if (!selectedEvent) return;
-      
+    const loadEventData = async () => {
       try {
-        const response = await fetch(`/api/tips?eventName=${selectedEvent}`);
-        const data = await response.json();
-        setTips(data);
+        const env = await getEnvVars();
+        setCurrentEvent(env);
+        loadTips(env.EVENT_NAME);
       } catch (error) {
-        console.error('Error loading tips:', error);
+        console.error('Error loading event data:', error);
+        toast({
+          title: 'Error',
+          description: 'Failed to load event data. Please try again.',
+          variant: 'destructive',
+        });
       }
     };
-    loadTips();
-  }, [selectedEvent]);
 
-  const onSubmit = async (data: TipFormData) => {
-    if (!executeRecaptcha) {
+    loadEventData();
+  }, [toast]);
+
+  const loadTips = async (eventName: string) => {
+    try {
+      const response = await fetch(`/api/tips?eventName=${encodeURIComponent(eventName)}`);
+      const data = await response.json();
+      setTips(data);
+    } catch (error) {
+      console.error('Error loading tips:', error);
       toast({
         title: 'Error',
-        description: 'ReCAPTCHA not loaded. Please try again.',
+        description: 'Failed to load tips. Please try again.',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const onSubmit = async (data: TipFormData) => {
+    if (!currentEvent?.EVENT_NAME) {
+      toast({
+        title: 'Error',
+        description: 'Please wait for event data to load.',
         variant: 'destructive',
       });
       return;
@@ -73,7 +71,6 @@ useEffect(() => {
 
     try {
       setLoading(true);
-      const recaptchaToken = await executeRecaptcha('submit_tip');
       
       const response = await fetch('/api/tips', {
         method: 'POST',
@@ -82,19 +79,21 @@ useEffect(() => {
         },
         body: JSON.stringify({
           ...data,
-          recaptchaToken,
+          eventName: currentEvent.EVENT_NAME,
         }),
       });
 
-      if (response.ok) {
-        toast({
-          title: 'Success!',
-          description: 'Your tip has been submitted for review.',
-        });
-        reset();
-      } else {
+      if (!response.ok) {
         throw new Error('Failed to submit tip');
       }
+
+      toast({
+        title: 'Success!',
+        description: 'Your tip has been submitted for review.',
+      });
+      
+      reset();
+      loadTips(currentEvent.EVENT_NAME);
     } catch (error) {
       console.error('Error:', error);
       toast({
@@ -109,11 +108,15 @@ useEffect(() => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8">Festival Packing Tips</h1>
+      <h1 className="text-4xl font-bold text-center mb-4">Festival Packing Tips</h1>
+      <p className="text-center text-lg mb-8 text-muted-foreground">Share your festival wisdom with fellow attendees</p>
 
       <div className="grid gap-8 md:grid-cols-2">
-        <Card className="p-6">
-          <h2 className="text-2xl font-bold mb-4">Submit a Tip</h2>
+        <Card className="p-6 bg-[#FFD600]/5 brutal-border border-[#FFD600]">
+          <h2 className="text-2xl font-bold mb-4 text-[#FFD600] flex items-center gap-2">
+            <Lightbulb className="h-6 w-6" />
+            Submit a Tip
+          </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
               <Input
@@ -122,7 +125,7 @@ useEffect(() => {
                 readOnly
                 hidden
               />
-              <h2 className="text-xl font-bold mb-2">{currentEvent?.EVENT_NAME}</h2>
+              <h2 className="text-xl font-bold mb-2 text-[#FFD600]">{currentEvent?.EVENT_NAME}</h2>
             </div>
 
             <div>
@@ -130,6 +133,8 @@ useEffect(() => {
                 {...register('tip')}
                 placeholder="Share your packing tip (max 280 characters)"
                 maxLength={280}
+                required
+                className="border-[#FFD600] focus-visible:ring-[#FFD600]"
               />
             </div>
 
@@ -137,51 +142,58 @@ useEffect(() => {
               <Input
                 {...register('authorHandle')}
                 placeholder="Your handle (optional, e.g. @FestivalPro)"
+                className="border-[#FFD600] focus-visible:ring-[#FFD600]"
               />
             </div>
 
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button 
+              type="submit" 
+              className="w-full bg-[#FFD600] hover:bg-[#FFD600]/90 text-black brutal-border border-[#FFD600]" 
+              disabled={loading}
+            >
               {loading ? 'Submitting...' : 'Submit Tip'}
             </Button>
           </form>
         </Card>
 
-        <Card className="p-6">
-          <h2 className="text-2xl font-bold mb-4">Browse Tips</h2>
+        <Card className="p-6 bg-[#FFD600]/5 brutal-border border-[#FFD600]">
+          <h2 className="text-2xl font-bold mb-4 text-[#FFD600] flex items-center gap-2">
+            <Lightbulb className="h-6 w-6" />
+            Browse Tips
+          </h2>
           <div className="mb-4">
-            <h2 className="text-xl font-bold mb-2">{currentEvent?.EVENT_NAME}</h2>
+            <h2 className="text-xl font-bold mb-2 text-[#FFD600]">{currentEvent?.EVENT_NAME}</h2>
           </div>
 
           <div className="space-y-4">
-            {tips.map((tip) => (
-              <Card key={tip.id} className="p-4">
-                <p className="text-sm">{tip.tip}</p>
-                {tip.authorHandle && (
-                  <p className="text-sm text-muted-foreground mt-2">
-                    - {tip.authorHandle}
-                  </p>
-                )}
-              </Card>
-            ))}
+            {tips.length === 0 ? (
+              <p className="text-center text-muted-foreground p-4 bg-[#FFD600]/10 brutal-border border-[#FFD600]">
+                No approved tips yet. Be the first to share!
+              </p>
+            ) : (
+              tips.map((tip) => (
+                <Card key={tip.id} className="p-4 bg-[#FFD600]/10 brutal-border border-[#FFD600]">
+                  <p className="text-sm">{tip.tip}</p>
+                  {tip.authorHandle && (
+                    <p className="text-sm text-[#FFD600] mt-2">
+                      - {tip.authorHandle}
+                    </p>
+                  )}
+                </Card>
+              ))
+            )}
           </div>
         </Card>
       </div>
-    </div>
-  );
-}
 
-export default function TipsPage() {
-  return (
-    <GoogleReCaptchaProvider
-      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
-      scriptProps={{
-        async: false,
-        defer: false,
-        appendTo: 'head',
-        nonce: undefined,
-      }}
-    >
-      <TipsPageContent />
-    </GoogleReCaptchaProvider>
+      <div className="mt-8 text-center">
+        <Button 
+          onClick={() => router.push('/')} 
+          className="bg-[#FFD600] hover:bg-[#FFD600]/90 text-black brutal-border border-[#FFD600]"
+        >
+          Back to Home
+        </Button>
+      </div>
+    </div>
   );
 }

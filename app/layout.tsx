@@ -1,23 +1,22 @@
 import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { getEnvVars } from '@/lib/env';
 import { Toaster } from '@/components/ui/toaster';
+import { Navbar } from '@/components/NavBar';
 
 const inter = Inter({ 
   subsets: ['latin'],
-  display: 'swap', // Optimize font loading
+  display: 'swap',
   preload: true
 });
 
 export async function generateMetadata(): Promise<Metadata> {
   const env = await getEnvVars();
   
-  // Create a clean title without the year
   const baseTitle = env.EVENT_NAME.replace(/\s*\d{4}$/, '');
   const year = new Date(env.EVENT_DATE).getFullYear();
   
-  // Construct SEO-friendly title variations
   const title = `${baseTitle} ${year}`;
   const shortTitle = baseTitle;
   
@@ -84,18 +83,19 @@ export async function generateMetadata(): Promise<Metadata> {
     category: 'event',
     applicationName: shortTitle,
     referrer: 'origin-when-cross-origin',
-    colorScheme: 'dark light',
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-      maximumScale: 5,
-    },
-    themeColor: [
-      { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-      { media: '(prefers-color-scheme: dark)', color: '#000000' },
-    ],
   };
 }
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#000000' },
+  ],
+  colorScheme: 'dark light',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export default async function RootLayout({
   children,
@@ -155,7 +155,9 @@ export default async function RootLayout({
           Skip to main content
         </a>
         
-        <div className="brutal-border bg-white dark:bg-black p-4 text-center text-sm">
+        <Navbar />
+        
+        <div className="brutal-border bg-white dark:bg-black p-4 text-center text-sm mt-16">
           <strong>Disclaimer:</strong> This is an unofficial event website created by{' '}
           <a 
             href="https://incubit.nl" 
@@ -172,17 +174,21 @@ export default async function RootLayout({
           {children}
         </main>
 
-        <footer className="fixed bottom-0 w-full bg-background/80 backdrop-blur-sm border-t py-4">
+        <footer
+          className="fixed bottom-0 w-full bg-background/80 backdrop-blur-sm border-t py-4 transition-opacity duration-5000"
+          style={{ opacity: 1 }}
+          onAnimationEnd={(e) => (e.currentTarget.style.opacity = '0')}
+        >
           <div className="container mx-auto text-center">
             <p className="text-sm mb-1">
               Website crafted by{' '}
               <a
-                href="https://incubit.nl"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-bold hover:underline"
+          href="https://incubit.nl"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-bold hover:underline"
               >
-                Incubit.nl
+          Incubit.nl
               </a>
             </p>
             <p className="text-xs text-muted-foreground">

@@ -13,6 +13,7 @@ import { Schedule } from '@/components/Schedule';
 import { Sponsors } from '@/components/Sponsors';
 import { CookieBanner } from '@/components/CookieBanner';
 import { IncubitPromo } from '@/components/IncubitPromo';
+import { CallToAction } from '@/components/CallToAction';
 import { logger } from '@/lib/logger';
 
 export default function Home() {
@@ -99,6 +100,9 @@ export default function Home() {
             </Button>
           </div>
         </section>
+
+        {/* Call to Action Section */}
+        <CallToAction />
 
         {/* Event Details */}
         <div className="container mx-auto px-4 py-8 md:py-16">

@@ -1,18 +1,24 @@
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
-import { verifyRecaptcha } from '@/lib/recaptcha';
 
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
-    const { eventName, tip, authorHandle, recaptchaToken } = await req.json();
+    const { eventName, tip, authorHandle } = await req.json();
 
-    // Verify reCAPTCHA
-    const isValidRecaptcha = await verifyRecaptcha(recaptchaToken);
-    if (!isValidRecaptcha) {
+    // Basic validation
+    if (!eventName || !tip) {
       return NextResponse.json(
-        { error: 'Invalid reCAPTCHA verification' },
+        { error: 'Event name and tip are required' },
+        { status: 400 }
+      );
+    }
+
+    // Validate tip length
+    if (tip.length > 280) {
+      return NextResponse.json(
+        { error: 'Tip must be 280 characters or less' },
         { status: 400 }
       );
     }
