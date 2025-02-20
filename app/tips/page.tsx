@@ -201,7 +201,7 @@ function TipsForm() {
                 </Card>
             </div>
 
-            <div className="mt-8 text-center">
+            <div className="mt-8 text-center mb-14">
                 <Button 
                     onClick={() => router.push('/')} 
                     className="bg-[#FFD600] hover:bg-[#FFD600]/90 text-black brutal-border border-[#FFD600]"

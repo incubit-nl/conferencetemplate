@@ -256,7 +256,7 @@ function ChecklistForm() {
                     </form>
                 </Card>
                 
-                <div className="text-center mt-8">
+                <div className="text-center mt-8 mb-14">
                     <Button 
                         onClick={() => router.push('/')} 
                         className="bg-[#FFD600] hover:bg-[#FFD600]/90 text-black brutal-border border-[#FFD600]"
