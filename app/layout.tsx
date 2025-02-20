@@ -113,6 +113,8 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#000000" />
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1971264696648136"
+        crossOrigin="anonymous"></script>
         <link 
           rel="preconnect" 
           href="https://fonts.googleapis.com" 
