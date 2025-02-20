@@ -385,7 +385,7 @@ export const events: Record<string, EventConfig> = {
     EVENT_DESCRIPTION: "The world's leading cannabis industry event returns to Amsterdam for its 38th edition. Experience the latest innovations in cannabis culture, industry insights, and the prestigious cannabis competition that sets global standards.",
     EVENT_SHORT_DESCRIPTION: "World's premier cannabis industry event",
     EVENT_TICKETS_URL: "https://tickets.cannabiscup2025.nl",
-    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1536819114556-1c5110de2c1d",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1498671546682-94a232c26d17",
     EVENT_TWITTER_HANDLE: "@HighTimesCup",
     EVENT_KEYWORDS: "cannabis cup, marijuana, amsterdam, cannabis industry, high times, netherlands, coffee shops, cannabis culture",
     EVENT_ORGANIZER: "High Times Magazine",
@@ -749,7 +749,7 @@ export const events: Record<string, EventConfig> = {
     EVENT_DESCRIPTION: "A unique classical music festival set along Amsterdam's historic canals, featuring over 250 concerts at iconic locations. Experience world-class performances on boats, in historic buildings, and in hidden gardens throughout the city.",
     EVENT_SHORT_DESCRIPTION: "Amsterdam's classical music festival on the canals",
     EVENT_TICKETS_URL: "https://tickets.grachtenfestival2025.nl",
-    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1534277621182-d6c604a7c8b6",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1564152387739-34b59b4965e5",
     EVENT_TWITTER_HANDLE: "@grachtenfest",
     EVENT_KEYWORDS: "classical music, amsterdam canals, music festival, culture, netherlands, concerts, chamber music",
     EVENT_ORGANIZER: "Grachtenfestival Foundation",
@@ -1802,7 +1802,7 @@ export const events: Record<string, EventConfig> = {
       EVENT_DESCRIPTION: "Amsterdam's contemporary art scene comes alive with exhibitions, performances, and events across galleries, museums, and artist studios. Discover emerging artists, attend exclusive openings, and explore the city's vibrant art community.",
       EVENT_SHORT_DESCRIPTION: "Amsterdam's contemporary art celebration",
       EVENT_TICKETS_URL: "https://tickets.amsterdamartweek.nl",
-      EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1594388384960-de72b561d632",
+      EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b",
       EVENT_TWITTER_HANDLE: "@ArtWeekAMS",
       EVENT_KEYWORDS: "art, contemporary art, amsterdam, galleries, exhibitions, culture, museums, netherlands",
       EVENT_ORGANIZER: "Amsterdam Art Foundation",
@@ -2015,7 +2015,7 @@ export const events: Record<string, EventConfig> = {
     EVENT_DESCRIPTION: "The world-renowned Coachella Festival returns in 2025, bringing together the biggest names in music, groundbreaking art installations, and an unforgettable desert experience. Two weekends of diverse musical performances across multiple stages, featuring genres from indie rock to electronic, hip-hop, and beyond.",
     EVENT_SHORT_DESCRIPTION: "Iconic music & arts festival in the California desert",
     EVENT_TICKETS_URL: "https://tickets.coachella2025.nl",
-    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1537044333255-6fa3b5363e11",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1603924039092-e92d987c772b",
     EVENT_TWITTER_HANDLE: "@coachella",
     EVENT_KEYWORDS: "coachella, music festival, arts festival, california, indie music, hip-hop, electronic music, desert festival",
     EVENT_ORGANIZER: "Goldenvoice",
@@ -2090,7 +2090,7 @@ export const events: Record<string, EventConfig> = {
     EVENT_DESCRIPTION: "Discover the best in international cinema at the Utrecht International Film Festival 2025. Featuring premieres, retrospectives, and special events across Utrecht's historic theaters and cultural venues. Join filmmakers, industry professionals, and film enthusiasts for a week of screenings, talks, and celebrations.",
     EVENT_SHORT_DESCRIPTION: "Celebrating international cinema in Utrecht",
     EVENT_TICKETS_URL: "https://tickets.utrecht2025.nl",
-    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1521737711862-5f0f5c9d3c2e",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1583510540668-afc24bcc04f2",
     EVENT_TWITTER_HANDLE: "@utrechtfilm",
     EVENT_KEYWORDS: "film festival, utrecht, cinema, movies, international film, independent film, netherlands",
     EVENT_ORGANIZER: "Utrecht Film Foundation",
@@ -2233,7 +2233,7 @@ export const events: Record<string, EventConfig> = {
     EVENT_DESCRIPTION: "Experience the transformative power of Burning Man in the Black Rock Desert. This unique gathering combines art, self-expression, and community in a temporary city. Featuring massive art installations, theme camps, and performances in a radical environment of creativity and innovation.",
     EVENT_SHORT_DESCRIPTION: "Temporary city of art and radical self-expression",
     EVENT_TICKETS_URL: "https://tickets.burningman2025.nl",
-    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1532098850201-89d86eeb345a",
+    EVENT_IMAGE_URL: "https://images.unsplash.com/photo-1603924039092-e92d987c772b",
     EVENT_TWITTER_HANDLE: "@burningman",
     EVENT_KEYWORDS: "burning man, art festival, black rock city, desert festival, installation art, community, radical self-expression",
     EVENT_ORGANIZER: "Burning Man Project",
@@ -2963,7 +2963,75 @@ export const events: Record<string, EventConfig> = {
       }
     ])
   },
-
+  
+    'nijmegen2025.nl': {
+      ...commonConfig,
+      EVENT_NAME: "Nijmeegse Vierdaagse 2025",
+      EVENT_DATE: "2025-07-15",
+      EVENT_LOCATION: "Nijmegen, Netherlands",
+      EVENT_DESCRIPTION: "The 107th edition of the world's largest multi-day walking event, attracting over 45,000 participants from more than 70 countries. Walkers challenge themselves to complete daily distances of 30, 40, or 50 kilometers through the scenic landscapes surrounding Nijmegen.",
+      EVENT_SHORT_DESCRIPTION: "World's largest multi-day walking event",
+      EVENT_TICKETS_URL: "https://www.4daagse.nl/en/",
+      EVENT_IMAGE_URL: "https://www.4daagse.nl/images/4daagse2025.jpg",
+      EVENT_TWITTER_HANDLE: "@4daagse",
+      EVENT_KEYWORDS: "Nijmeegse Vierdaagse, walking event, Nijmegen, 2025, The Walk of the World, multi-day walk, Netherlands",
+      EVENT_ORGANIZER: "Stichting DE 4DAAGSE",
+      EVENT_ORGANIZER_URL: "https://www.4daagse.nl/en/",
+      SITE_URL: "https://www.4daagse.nl/en/",
+      EVENT_START_TIME: "04:00",
+      EVENT_END_TIME: "17:00",
+      EVENT_CAPACITY: "45000",
+      EVENT_PRICE_FROM: "120",
+      EVENT_EMAIL: "info@4daagse.nl",
+      EVENT_PHONE: "+31 24 365 55 55",
+      EVENT_LINKEDIN_URL: "https://www.linkedin.com/company/de-4daagse",
+      EVENT_TWITTER_URL: "https://twitter.com/4daagse",
+      EVENT_FACEBOOK_URL: "https://www.facebook.com/4daagse",
+      EVENT_SPEAKERS: JSON.stringify([]),
+      EVENT_SCHEDULE: JSON.stringify([
+        {
+          "time": "04:00",
+          "title": "Day 1: The Day of Elst",
+          "location": "Nijmegen to Elst",
+          "description": "Participants walk through the Betuwe region, passing through the town of Elst."
+        },
+        {
+          "time": "04:00",
+          "title": "Day 2: The Day of Wijchen",
+          "location": "Nijmegen to Wijchen",
+          "description": "The route leads walkers through the Land van Maas en Waal, including the town of Wijchen."
+        },
+        {
+          "time": "04:00",
+          "title": "Day 3: The Day of Groesbeek",
+          "location": "Nijmegen to Groesbeek",
+          "description": "Known for its challenging hills, this day takes participants through Groesbeek and its surroundings."
+        },
+        {
+          "time": "04:00",
+          "title": "Day 4: The Day of Cuijk",
+          "location": "Nijmegen to Cuijk",
+          "description": "The final day includes a festive crossing of the Waal River and concludes on the 'Via Gladiola' in Nijmegen."
+        }
+      ]),
+      EVENT_SPONSORS: JSON.stringify([
+        {
+          "name": "Rabobank",
+          "tier": "platinum",
+          "logo": "https://www.rabobank.nl/logo.png"
+        },
+        {
+          "name": "Heineken",
+          "tier": "gold",
+          "logo": "https://www.heineken.com/logo.png"
+        },
+        {
+          "name": "Nike",
+          "tier": "silver",
+          "logo": "https://www.nike.com/logo.png"
+        }
+      ])
+    },
   'defqon2025.nl': {
     ...commonConfig,
     EVENT_NAME: "Defqon.1 2025",
