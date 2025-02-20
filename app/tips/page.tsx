@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -11,29 +11,40 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { getEnvVars } from '@/lib/env';
 
+
 interface TipFormData {
   eventName: string;
   tip: string;
   authorHandle: string;
 }
 
-export default function TipsPage() {
+function TipsPageContent() {
   const [loading, setLoading] = useState(false);
   const [tips, setTips] = useState<any[]>([]);
-  const [events, setEvents] = useState<any[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<string>('');
+  const [eventsList, setEventsList] = useState<Array<{ id: string; name: string }>>([]);
   const { executeRecaptcha } = useGoogleReCaptcha();
   const { toast } = useToast();
   const { register, handleSubmit, reset } = useForm<TipFormData>();
+  const [currentEvent, setCurrentEvent] = useState<any>(null);
 
-  useEffect(() => {
-    const loadEvents = async () => {
-      const env = await getEnvVars();
-      // Extract events from env
-      // This would depend on your events structure
+
+useEffect(() => {
+    const loadEventData = async () => {
+        try {
+            const env = await getEnvVars();
+            setCurrentEvent(env);
+        } catch (error) {
+            console.error('Error loading event data:', error);
+            toast({
+                title: 'Error',
+                description: 'Failed to load event data. Please try again.',
+                variant: 'destructive',
+            });
+        }
     };
-    loadEvents();
-  }, []);
+    loadEventData();
+}, []);
 
   useEffect(() => {
     const loadTips = async () => {
@@ -105,18 +116,13 @@ export default function TipsPage() {
           <h2 className="text-2xl font-bold mb-4">Submit a Tip</h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div>
-              <Select onValueChange={(value) => register('eventName').onChange({ target: { value } })}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Choose an event" />
-                </SelectTrigger>
-                <SelectContent>
-                  {events.map((event) => (
-                    <SelectItem key={event.name} value={event.name}>
-                      {event.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Input
+                {...register('eventName')}
+                value={currentEvent?.EVENT_NAME || ''}
+                readOnly
+                hidden
+              />
+              <h2 className="text-xl font-bold mb-2">{currentEvent?.EVENT_NAME}</h2>
             </div>
 
             <div>
@@ -143,18 +149,7 @@ export default function TipsPage() {
         <Card className="p-6">
           <h2 className="text-2xl font-bold mb-4">Browse Tips</h2>
           <div className="mb-4">
-            <Select onValueChange={setSelectedEvent}>
-              <SelectTrigger>
-                <SelectValue placeholder="Filter by event" />
-              </SelectTrigger>
-              <SelectContent>
-                {events.map((event) => (
-                  <SelectItem key={event.name} value={event.name}>
-                    {event.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <h2 className="text-xl font-bold mb-2">{currentEvent?.EVENT_NAME}</h2>
           </div>
 
           <div className="space-y-4">
@@ -172,5 +167,21 @@ export default function TipsPage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+export default function TipsPage() {
+  return (
+    <GoogleReCaptchaProvider
+      reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
+      scriptProps={{
+        async: false,
+        defer: false,
+        appendTo: 'head',
+        nonce: undefined,
+      }}
+    >
+      <TipsPageContent />
+    </GoogleReCaptchaProvider>
   );
 }
