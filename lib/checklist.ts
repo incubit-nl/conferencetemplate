@@ -38,88 +38,88 @@ export async function generateChecklist(options: ChecklistOptions) {
     },
   });
 
-  // Define sections with items
-  const sections: ChecklistSection[] = [
+// Define sections with items
+const sections: ChecklistSection[] = [
     {
-      title: 'Essential Items',
-      items: [
-        '🎫 Tickets and ID',
-        '💳 Credit/Debit Cards & Cash',
-        '📱 Phone and Charger',
-        '🔋 Portable Battery Pack',
-        '🚰 Reusable Water Bottle',
-        '🧴 Sunscreen (SPF 30+)',
-        '🕶 Sunglasses',
-        '🧢 Hat or Cap',
-        '🧪 Hand Sanitizer',
-      ]
+        title: 'Essential Items',
+        items: [
+            'Tickets and ID',
+            'Credit/Debit Cards & Cash',
+            'Phone and Charger',
+            'Portable Battery Pack',
+            'Reusable Water Bottle',
+            'Sunscreen (SPF 30+)',
+            'Sunglasses',
+            'Hat or Cap',
+            'Hand Sanitizer',
+        ]
     },
     {
-      title: options.isCamping ? 'Camping Essentials' : 'Comfort Items',
-      items: options.isCamping ? [
-        '⛺️ Tent & Stakes',
-        '🛏 Sleeping Bag & Pillow',
-        '🪑 Camping Chair',
-        '🔦 Flashlight/Headlamp',
-        '🔋 Extra Batteries',
-        '🧰 Basic Tool Kit',
-        '🧴 Bug Spray',
-        '🧺 Cooler',
-        '🧻 Toilet Paper'
-      ] : [
-        '🎒 Comfortable Backpack',
-        '🧥 Light Jacket/Sweater',
-        '☂️ Compact Umbrella',
-        '👕 Extra Layer of Clothing',
-        '🧴 Travel-size Toiletries'
-      ]
+        title: options.isCamping ? 'Camping Essentials' : 'Comfort Items',
+        items: options.isCamping ? [
+            'Tent & Stakes',
+            'Sleeping Bag & Pillow',
+            'Camping Chair',
+            'Flashlight/Headlamp',
+            'Extra Batteries',
+            'Basic Tool Kit',
+            'Bug Spray',
+            'Cooler',
+            'Toilet Paper'
+        ] : [
+            'Comfortable Backpack',
+            'Light Jacket/Sweater',
+            'Compact Umbrella',
+            'Extra Layer of Clothing',
+            'Travel-size Toiletries'
+        ]
     },
     {
-      title: options.isDayTrip ? 'Day Trip Essentials' : 'Multi-Day Necessities',
-      items: options.isDayTrip ? [
-        '🎒 Day Pack',
-        '🥪 Snacks',
-        '🧴 Travel-size Sunscreen',
-        '💊 Basic First Aid',
-        '📱 Portable Charger'
-      ] : [
-        '👕 Multiple Changes of Clothes',
-        '🧴 Full Toiletries Kit',
-        '🧺 Laundry Bag',
-        '🧪 First Aid Kit',
-        '💊 Any Required Medications',
-        '🔒 Locker Lock',
-        '🧦 Extra Socks & Underwear'
-      ]
+        title: options.isDayTrip ? 'Day Trip Essentials' : 'Multi-Day Necessities',
+        items: options.isDayTrip ? [
+            'Day Pack',
+            'Snacks',
+            'Travel-size Sunscreen',
+            'Basic First Aid',
+            'Portable Charger'
+        ] : [
+            'Multiple Changes of Clothes',
+            'Full Toiletries Kit',
+            'Laundry Bag',
+            'First Aid Kit',
+            'Any Required Medications',
+            'Locker Lock',
+            'Extra Socks & Underwear'
+        ]
     }
-  ];
+];
 
-  if (options.isFirstTimer) {
+if (options.isFirstTimer) {
     sections.push({
-      title: 'First Timer Tips',
-      items: [
-        '🗺 Download Festival Map',
-        '📱 Install Festival App',
-        '📝 Write Down Emergency Contacts',
-        '📍 Save Meeting Points',
-        '⏰ Check Set Times',
-        '💡 Read Festival Rules'
-      ]
+        title: 'First Timer Tips',
+        items: [
+            'Download Festival Map',
+            'Install Festival App',
+            'Write Down Emergency Contacts',
+            'Save Meeting Points',
+            'Check Set Times',
+            'Read Festival Rules'
+        ]
     });
-  }
+}
 
-  if (!options.isBudget) {
+if (!options.isBudget) {
     sections.push({
-      title: 'Comfort Upgrades',
-      items: [
-        '💨 Portable Fan',
-        '☔️ Premium Rain Gear',
-        '🛋 Inflatable Lounger',
-        '🧊 Cooling Towel',
-        '🔋 High-Capacity Power Bank'
-      ]
+        title: 'Comfort Upgrades',
+        items: [
+            'Portable Fan',
+            'Premium Rain Gear',
+            'Inflatable Lounger',
+            'Cooling Towel',
+            'High-Capacity Power Bank'
+        ]
     });
-  }
+}
 
   // Draw header
   page.drawText(options.eventName, {
