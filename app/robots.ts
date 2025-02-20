@@ -1,30 +1,63 @@
 import { MetadataRoute } from 'next';
-import { getEnvVars } from '@/lib/env';
+import { events } from '@/lib/events';
 
 export default async function robots(): Promise<MetadataRoute.Robots> {
-  const env = await getEnvVars();
+  // Get all event domains
+  const eventDomains = Object.keys(events);
+  const sitemaps: string[] = [];
+
+  // Generate sitemap URLs for each domain
+  eventDomains.forEach(domain => {
+    sitemaps.push(`https://${domain}/sitemap.xml`);
+  });
 
   return {
     rules: [
       {
         userAgent: '*',
-        allow: '/',
+        allow: [
+          '/',
+          '/checklist',
+          '/tips',
+          '/contact',
+          '/speakers/*',
+          '/schedule/*',
+          '/lineup',
+          '/tickets',
+          '/venue',
+          '/about',
+          '/faq',
+        ],
         disallow: [
-          '/api/',
-          '/_next/',
-          '/static/',
-          '/private/',
+          '/api/*',
+          '/_next/*',
+          '/static/*',
+          '/private/*',
           '*.json',
-          '*.xml'
+          '*.xml',
+          '/admin/*',
+          '/dashboard/*',
+          '/preview/*',
+          '/draft/*',
         ],
       },
       {
         userAgent: 'GPTBot',
         allow: ['/'],
         disallow: ['/private/', '/api/'],
-      }
+      },
+      {
+        userAgent: 'Googlebot',
+        allow: '/',
+        disallow: ['/private/', '/api/'],
+      },
+      {
+        userAgent: 'Bingbot',
+        allow: '/',
+        disallow: ['/private/', '/api/'],
+      },
     ],
-    sitemap: `${env.SITE_URL}/sitemap.xml`,
-    host: env.SITE_URL,
+    sitemap: sitemaps,
+    host: eventDomains[0], // Set primary domain as host
   };
 }

@@ -1,52 +1,77 @@
 import { MetadataRoute } from 'next';
+import { events } from '@/lib/events';
 import { getEnvVars } from '@/lib/env';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const env = await getEnvVars();
-  const baseUrl = env.SITE_URL;
+  // Get all event configurations
+  const eventConfigs = Object.entries(events);
+  const sitemapEntries: MetadataRoute.Sitemap = [];
   const lastModified = new Date();
 
-  // Generate dynamic routes based on event data
-  const speakerSlugs = env.EVENT_SPEAKERS.map(speaker => 
-    speaker.name.toLowerCase().replace(/\s+/g, '-')
-  );
+  // Generate sitemap entries for each event domain
+  for (const [domain, config] of eventConfigs) {
+    const baseUrl = `https://${domain}`;
+    
+    // Main pages with dynamic priorities
+    const mainPages = [
+      { path: '', priority: 1.0 }, // Homepage
+      { path: 'checklist', priority: 0.9 },
+      { path: 'tips', priority: 0.8 },
+      { path: 'contact', priority: 0.7 },
+      { path: 'privacy', priority: 0.5 },
+    ];
 
-  const routes = [
-    {
-      url: baseUrl,
-      lastModified,
-      changeFrequency: 'daily' as const,
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/schedule`,
-      lastModified,
-      changeFrequency: 'daily' as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/sponsors`,
-      lastModified,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/privacy`,
-      lastModified,
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    }
-  ];
-
-  // Add speaker pages to sitemap
-  speakerSlugs.forEach(slug => {
-    routes.push({
-      url: `${baseUrl}/speakers/${slug}`,
-      lastModified,
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
+    // Add main pages
+    mainPages.forEach(({ path, priority }) => {
+      sitemapEntries.push({
+        url: `${baseUrl}${path ? `/${path}` : ''}`,
+        lastModified,
+        changeFrequency: priority > 0.8 ? 'daily' : priority > 0.6 ? 'weekly' : 'monthly',
+        priority,
+      });
     });
-  });
 
-  return routes;
+    // Parse event data
+    const speakers = typeof config.EVENT_SPEAKERS === 'string' 
+      ? JSON.parse(config.EVENT_SPEAKERS)
+      : config.EVENT_SPEAKERS;
+
+    const schedule = typeof config.EVENT_SCHEDULE === 'string'
+      ? JSON.parse(config.EVENT_SCHEDULE)
+      : config.EVENT_SCHEDULE;
+
+    // Add speaker pages
+    speakers.forEach((speaker: { name: string; }) => {
+      const speakerSlug = speaker.name.toLowerCase().replace(/\s+/g, '-');
+      sitemapEntries.push({
+        url: `${baseUrl}/speakers/${speakerSlug}`,
+        lastModified,
+        changeFrequency: 'weekly',
+        priority: 0.8,
+      });
+    });
+
+    // Add schedule pages
+    schedule.forEach((item: any) => {
+      const scheduleSlug = item.title.toLowerCase().replace(/\s+/g, '-');
+      sitemapEntries.push({
+        url: `${baseUrl}/schedule/${scheduleSlug}`,
+        lastModified,
+        changeFrequency: 'daily',
+        priority: 0.8,
+      });
+    });
+
+    // Add category pages
+    ['lineup', 'tickets', 'venue', 'faq', 'about'].forEach(category => {
+      sitemapEntries.push({
+        url: `${baseUrl}/${category}`,
+        lastModified,
+        changeFrequency: 'weekly',
+        priority: 0.7,
+      });
+    });
+  }
+
+  return sitemapEntries;
 }
