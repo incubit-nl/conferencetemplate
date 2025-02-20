@@ -133,19 +133,6 @@ function ChecklistForm() {
         }
     };
 
-    if (!currentEvent) {
-        return (
-            <div className="container mx-auto px-4 py-8">
-                <Card className="max-w-2xl mx-auto p-6 text-center">
-                    <div className="animate-pulse">
-                        <div className="h-8 bg-[#FFD600]/20 rounded w-3/4 mx-auto mb-4"></div>
-                        <div className="h-4 bg-[#FFD600]/20 rounded w-1/2 mx-auto"></div>
-                    </div>
-                </Card>
-            </div>
-        );
-    }
-
     return (
         <TooltipProvider>
             <div className="container mx-auto px-4 py-8">
@@ -164,8 +151,8 @@ function ChecklistForm() {
                 
                 <Card className="max-w-2xl mx-auto p-6 bg-[#FFD600]/5 brutal-border border-[#FFD600]">
                     <div className="mb-6 brutal-border p-4">
-                        <h2 className="text-xl font-bold mb-2 text-[#FFD600]">{currentEvent.EVENT_NAME}</h2>
-                        <p className="text-sm text-muted-foreground">{currentEvent.EVENT_DESCRIPTION}</p>
+                        <h2 className="text-xl font-bold mb-2 text-[#FFD600]">{currentEvent?.EVENT_NAME}</h2>
+                        <p className="text-sm text-muted-foreground">{currentEvent?.EVENT_DESCRIPTION}</p>
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
@@ -286,11 +273,13 @@ export default function ChecklistPage() {
     const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
     
     if (!siteKey) {
+        console.error('Missing NEXT_PUBLIC_RECAPTCHA_SITE_KEY environment variable');
         return (
             <div className="container mx-auto px-4 py-8">
                 <Card className="max-w-2xl mx-auto p-6 text-center">
                     <h1 className="text-2xl font-bold mb-4">Configuration Error</h1>
                     <p>reCAPTCHA site key is not configured. Please check your environment variables.</p>
+                    <p className="text-sm text-muted-foreground mt-2">Required: NEXT_PUBLIC_RECAPTCHA_SITE_KEY</p>
                 </Card>
             </div>
         );
