@@ -197,8 +197,8 @@ if (!options.isBudget) {
 
     tips.forEach((tip) => {
       const tipText = tip.authorHandle 
-        ? `💡 ${tip.tip} - @${tip.authorHandle}`
-        : `💡 ${tip.tip}`;
+        ? `${tip.tip} - @${tip.authorHandle}`
+        : `${tip.tip}`;
       
       page.drawText(tipText, {
         x: startX,
