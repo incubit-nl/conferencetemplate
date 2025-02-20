@@ -13,29 +13,29 @@ async function main() {
   // Common tips that can be used across all events with slight variations
   const commonTips = [
     {
-      tip: "Pack a portable charger with at least 20,000mAh capacity - your phone will thank you later!",
-      authorHandle: "FestivalPro",
+      tip: "Shove a chunky battery pack in your bag—my phone died last time and I was lost as hell!",
+      authorHandle: "Mikeeeeee",
     },
     {
-      tip: "Bring a reusable water bottle with measurement marks - staying hydrated is key!",
-      authorHandle: "HydroHomie",
+      tip: "I bring a water bottle with lines—keeps me from turning into a sweaty mess!",
+      authorHandle: "sarah_",
     },
     {
-      tip: "Get a small fanny pack for essentials - keeps your hands free for dancing!",
-      authorHandle: "RaveReady",
+      tip: "Fanny pack’s my jam—hands free so I can throw ‘em up when the beat drops!",
+      authorHandle: "jj",
     },
     {
-        tip: "Pack a portable charger with at least 20,000 capacity - your phone will thank you later!",
-        authorHandle: "FestivalPro",
-        },
-        {
-        tip: "Bring a reusable water bottle with measurement marks - staying hydrated is key!",
-        authorHandle: "HydroHomie",
-        },
-        {
-        tip: "Get a small fanny pack for essentials - keeps your hands free for dancing!",
-        authorHandle: "RaveReady",
-    }
+      tip: "Grab a beat-up cap—sun fried my forehead once, never again!",
+      authorHandle: "lisaykit",
+    },
+    {
+      tip: "Sneak some granola bars in—waiting for food sucks when you’re starving!",
+      authorHandle: "tommietom",
+    },
+    {
+      tip: "Tiny fan’s a lifesaver—last fest I was melting ‘til I whipped it out!",
+      authorHandle: "bigemma",
+    },
   ];
 
   // Create tips for each event
