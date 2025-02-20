@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: env.EVENT_KEYWORDS.split(',').map(k => k.trim()),
     authors: [
       { name: env.EVENT_ORGANIZER, url: env.EVENT_ORGANIZER_URL },
-      { name: 'Incubit.nl', url: 'https://incubit.nl' }
+      { name: 'Incubit.io', url: 'https://incubit.io' }
     ],
     creator: env.EVENT_ORGANIZER,
     publisher: env.EVENT_ORGANIZER,
