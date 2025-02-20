@@ -1,3 +1,4 @@
+// app/api/checklist/route.ts
 import { NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import Stripe from 'stripe';
@@ -11,6 +12,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(req: Request) {
   try {
+    const body = await req.json();
     const {
       eventName,
       isCamping,
@@ -18,23 +20,37 @@ export async function POST(req: Request) {
       isFirstTimer,
       isBudget,
       recaptchaToken,
-    } = await req.json();
+    } = body;
+
+    console.log('Request body:', body); // Log incoming data
+
+    // Verify required fields
+    if (!eventName || recaptchaToken === undefined) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
 
     // Verify reCAPTCHA token
+    console.log('Verifying reCAPTCHA...');
     const isValidRecaptcha = await verifyRecaptcha(recaptchaToken);
     if (!isValidRecaptcha) {
+      console.log('reCAPTCHA verification failed');
       return NextResponse.json(
         { error: 'Invalid reCAPTCHA verification' },
         { status: 400 }
       );
     }
 
-    // Check if payment is required
+    // Check payment settings
+    console.log('Checking payment settings...');
     const paymentSetting = await prisma.paymentSetting.findFirst();
     const requirePayment = paymentSetting?.isEnabled ?? (process.env.ENABLE_PAYMENTS === 'true');
+    console.log('Payment required:', requirePayment);
 
     if (requirePayment) {
-      // Create Stripe checkout session
+      console.log('Creating Stripe session...');
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
         line_items: [
@@ -62,9 +78,10 @@ export async function POST(req: Request) {
         },
       });
 
+      console.log('Stripe session created:', session.url);
       return NextResponse.json({ url: session.url });
     } else {
-      // Generate checklist without payment
+      console.log('Generating free checklist...');
       const checklist = await generateChecklist({
         eventName,
         isCamping,
@@ -72,6 +89,8 @@ export async function POST(req: Request) {
         isFirstTimer,
         isBudget,
       });
+
+      console.log('Checklist generated:', checklist);
 
       // Store the download in database
       await prisma.checklistDownload.create({
@@ -86,12 +105,13 @@ export async function POST(req: Request) {
         },
       });
 
+      console.log('Checklist stored in DB');
       return NextResponse.json(checklist);
     }
   } catch (error) {
-    console.error('Error processing checklist request:', error);
+    console.error('Detailed error:', error instanceof Error ? error.message : error);
     return NextResponse.json(
-      { error: 'Failed to process request' },
+      { error: 'Failed to process request', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     );
   }
