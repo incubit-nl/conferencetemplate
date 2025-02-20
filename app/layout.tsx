@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { getEnvVars } from '@/lib/env';
 import { Toaster } from '@/components/ui/toaster';
 import { Navbar } from '@/components/NavBar';
+import Footer from '@/components/Footer'; // Direct import, no dynamic needed
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -13,10 +14,8 @@ const inter = Inter({
 
 export async function generateMetadata(): Promise<Metadata> {
   const env = await getEnvVars();
-  
   const baseTitle = env.EVENT_NAME.replace(/\s*\d{4}$/, '');
   const year = new Date(env.EVENT_DATE).getFullYear();
-  
   const title = `${baseTitle} ${year}`;
   const shortTitle = baseTitle;
   
@@ -174,28 +173,7 @@ export default async function RootLayout({
           {children}
         </main>
 
-        <footer
-          className="fixed bottom-0 w-full bg-background/80 backdrop-blur-sm border-t py-4 transition-opacity"
-          style={{ opacity: 1 }}
-        >
-          <div className="container mx-auto text-center">
-            <p className="text-sm mb-1">
-              Website crafted by{' '}
-              <a
-          href="https://incubit.io"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="font-bold hover:underline"
-              >
-          Incubit.io
-              </a>
-            </p>
-            <p className="text-xs text-muted-foreground">
-              Leading Dutch Digital Agency | Custom Web Development & Design
-            </p>
-          </div>
-        </footer>
-        
+        <Footer />
         <Toaster />
       </body>
     </html>
