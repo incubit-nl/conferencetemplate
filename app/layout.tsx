@@ -160,12 +160,12 @@ export default async function RootLayout({
         <div className="brutal-border bg-white dark:bg-black p-4 text-center text-sm mt-16">
           <strong>Disclaimer:</strong> This is an unofficial event website created by{' '}
           <a 
-            href="https://incubit.nl" 
+            href="https://incubit.io" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="underline hover:text-primary"
           >
-            Incubit.nl
+            Incubit.io
           </a>
           . We are not affiliated with the event organizers.
         </div>
@@ -182,12 +182,12 @@ export default async function RootLayout({
             <p className="text-sm mb-1">
               Website crafted by{' '}
               <a
-          href="https://incubit.nl"
+          href="https://incubit.io"
           target="_blank"
           rel="noopener noreferrer"
           className="font-bold hover:underline"
               >
-          Incubit.nl
+          Incubit.io
               </a>
             </p>
             <p className="text-xs text-muted-foreground">
