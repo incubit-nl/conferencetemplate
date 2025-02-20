@@ -138,27 +138,49 @@ export async function generateChecklist(options: ChecklistOptions) {
     color: primaryColor,
   });
 
-  // Cover title with a fun twist
-  coverPage.drawText(`${options.eventName}`, {
-    x: 50,
-    y: pageHeight - 150,
-    size: 48,
-    font: timesRomanBold,
-    color: textColor,
-    rotate: degrees(-5), // Slight tilt for flair
+  // Dynamically adjust event name size and wrap if needed
+  const eventName = options.eventName;
+  const maxWidth = pageWidth - 100; // Leave 50px margin on each side
+  let fontSize = 48;
+    let textWidth = timesRomanBold.widthOfTextAtSize(eventName, fontSize);
+
+  // Shrink font size if too wide
+  while (textWidth > maxWidth && fontSize > 20) {
+    fontSize -= 2;
+    textWidth = timesRomanBold.widthOfTextAtSize(eventName, fontSize);
+  }
+
+  // If still too long, split into words and wrap
+  const words = eventName.split(' ');
+  let lines = [''];
+  let currentLine = 0;
+  for (const word of words) {
+    const testLine = lines[currentLine] + (lines[currentLine] ? ' ' : '') + word;
+    if (timesRomanBold.widthOfTextAtSize(testLine, fontSize) <= maxWidth) {
+      lines[currentLine] = testLine;
+    } else {
+      currentLine++;
+      lines[currentLine] = word;
+    }
+  }
+
+  // Draw the lines
+  let yPos = pageHeight - 150;
+  lines.forEach((line) => {
+    coverPage.drawText(line, {
+      x: 50,
+      y: yPos,
+      size: fontSize,
+      font: timesRomanBold,
+      color: textColor,
+      rotate: degrees(-5), // Keep the fun tilt
+    });
+    yPos -= fontSize + 10; // Space between lines
   });
 
-  coverPage.drawText('Your Ultimate Festival Checklist', {
+  coverPage.drawText('Made just for you • Get Ready to Rage!', {
     x: 60,
-    y: pageHeight - 220,
-    size: 28,
-    font: helveticaBold,
-    color: accentColor,
-  });
-
-  coverPage.drawText('Made Just for You • Get Ready to Rage!', {
-    x: 60,
-    y: pageHeight - 260,
+    y: yPos - 80,
     size: 16,
     font: helvetica,
     color: subtleColor,
@@ -274,11 +296,12 @@ export async function generateChecklist(options: ChecklistOptions) {
   // --- Page 3: Community Tips ---
   if (tips.length > 0) {
     const tipsPage = pdfDoc.addPage([pageWidth, pageHeight]);
-    currentY = pageHeight - 70;
+    let currentY = pageHeight - 150; // Tips start lower
 
+    // Move title lower to stay above tips
     tipsPage.drawText('Pro Tips from the Fest Fam', {
       x: col1X,
-      y: pageHeight - 50,
+      y: pageHeight - 110, // Lowered from -50 to -110 to clear the tips
       size: 24,
       font: helveticaBold,
       color: primaryColor,
@@ -312,18 +335,18 @@ export async function generateChecklist(options: ChecklistOptions) {
       currentY -= 40;
     });
 
-    // Footer
-    tipsPage.drawText('Got a killer tip? Share it with us!', {
-      x: col1X,
-      y: 50,
-      size: 12,
-      font: helvetica,
-      color: subtleColor,
-    });
-  }
+      // Footer
+      tipsPage.drawText('Got a killer tip? Share it with us!', {
+        x: col1X,
+        y: 50,
+        size: 12,
+        font: helvetica,
+        color: subtleColor,
+      });
+    }
 
   // Global Footer on all pages
-  const footerText = `Generated for ${options.siteUrl} • Worth Every Penny • Enjoy the Fest!`;
+  const footerText = `Generated for ${options.siteUrl} • Enjoy the Fest!`;
   [coverPage, checklistPage, ...(tips.length > 0 ? [pdfDoc.getPage(2)] : [])].forEach((page) => {
     const footerWidth = helvetica.widthOfTextAtSize(footerText, 10);
     page.drawText(footerText, {
