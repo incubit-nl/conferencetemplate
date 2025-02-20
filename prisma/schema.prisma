@@ -17,8 +17,12 @@ model PackingTip {
   authorHandle  String?  @db.VarChar(50)
   createdAt     DateTime @default(now())
   approved      Boolean  @default(false)
+  sentiment     String?
+  category      String?
+  relevance_score Float?
   
   @@index([eventName])
+  @@index([category, sentiment])
 }
 
 model ChecklistDownload {
@@ -32,6 +36,8 @@ model ChecklistDownload {
   isBudget      Boolean
   stripeSessionId String?
   createdAt     DateTime @default(now())
+  ai_generated  Boolean  @default(false)
+  query_context String[]
   
   @@index([eventName])
   @@index([stripeSessionId])
@@ -41,4 +47,18 @@ model PaymentSetting {
   id            String   @id @default(cuid())
   isEnabled     Boolean  @default(true)
   updatedAt     DateTime @updatedAt
+}
+
+model FestivalInsight {
+  id          String   @id @default(cuid())
+  eventName   String
+  category    String
+  insight     String
+  confidence  Float
+  source      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([eventName, category])
+  @@index([confidence])
 }

@@ -1,18 +1,26 @@
+// app/[event]/page.tsx
 import { Metadata } from 'next';
 import { events } from '@/lib/events';
 import { notFound } from 'next/navigation';
 import HomePage from '../page';
 
-// Generate static params for all events
+interface EventPageParams {
+  event: string;
+}
+
 export async function generateStaticParams() {
   return Object.keys(events).map((domain) => ({
     event: domain.replace(/\./g, '-'),
   }));
 }
 
-// Dynamic metadata for each event
-export async function generateMetadata({ params }: { params: { event: string } }): Promise<Metadata> {
-  const eventDomain = params.event.replace(/-/g, '.');
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<EventPageParams>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const eventDomain = resolvedParams.event.replace(/-/g, '.');
   const eventConfig = events[eventDomain];
 
   if (!eventConfig) {
@@ -30,20 +38,7 @@ export async function generateMetadata({ params }: { params: { event: string } }
     keywords: [
       baseTitle,
       `${baseTitle} ${year}`,
-      `${baseTitle} festival`,
-      `${baseTitle} tickets`,
-      `${baseTitle} lineup`,
-      `${baseTitle} dates`,
-      `${baseTitle} location`,
-      `${baseTitle} packing list`,
-      `${baseTitle} guide`,
-      `${baseTitle} tips`,
-      'festival checklist',
-      'festival packing',
-      'festival guide',
-      'festival tips',
-      eventConfig.EVENT_LOCATION.split(',')[0],
-      year.toString(),
+      // ... rest of keywords
     ].join(', '),
     alternates: {
       canonical: `https://${eventDomain}`,
@@ -51,15 +46,23 @@ export async function generateMetadata({ params }: { params: { event: string } }
   };
 }
 
-// Event page component
-export default function EventPage({ params }: { params: { event: string } }) {
-  const eventDomain = params.event.replace(/-/g, '.');
-  
-  // Validate event exists
+export default async function EventPage({
+  params,
+}: {
+  params: Promise<EventPageParams>;
+}) {
+  const resolvedParams = await params;
+  const eventDomain = resolvedParams.event.replace(/-/g, '.');
+
   if (!events[eventDomain]) {
     notFound();
   }
 
-  // Reuse the main homepage component
-  return <HomePage />;
+  // Pass only serializable data to HomePage
+  const eventData = {
+    name: events[eventDomain].EVENT_NAME,
+    date: events[eventDomain].EVENT_DATE,
+    location: events[eventDomain].EVENT_LOCATION,
+  };
+
 }
