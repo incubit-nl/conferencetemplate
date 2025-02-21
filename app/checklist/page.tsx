@@ -9,9 +9,11 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { getEnvVars } from '@/lib/env';
-import { Tent, Sun, Calendar, CreditCard, HelpCircle } from 'lucide-react';
+import { Tent, Sun, Calendar, CreditCard, HelpCircle, Info } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { AdSlot } from '@/components/AdSlot';
+import Script from 'next/script';
 
 interface FormData {
     eventName: string;
@@ -80,8 +82,6 @@ function ChecklistForm() {
 
         try {
             setLoading(true);
-            
-            // Execute reCAPTCHA
             const recaptchaToken = await executeRecaptcha('checklist_submit');
             
             const response = await fetch('/api/checklist', {
@@ -135,19 +135,37 @@ function ChecklistForm() {
 
     return (
         <TooltipProvider>
+            <Script
+                async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1971264696648136"
+                crossOrigin="anonymous"
+                strategy="lazyOnload"
+            />
+            
             <div className="container mx-auto px-4 py-8">
                 <h1 className="text-4xl font-bold text-center mb-4 text-[#FFD600]">Festival Packing Checklist</h1>
                 
+                {/* Enhanced Value Proposition */}
                 <div className="text-center mb-8">
-                    <p className="text-lg mb-2">
+                    <h2 className="text-2xl font-semibold mb-4">Never Forget Essential Festival Gear Again!</h2>
+                    <p className="text-lg mb-4">
                         {paymentsEnabled
                             ? 'Get your custom packing checklist for just $2.99'
                             : 'Get your free custom packing checklist'}
                     </p>
-                    <p className="text-sm text-muted-foreground">
-                        Personalized for your festival experience with pro tips from experienced attendees
-                    </p>
+                    <div className="space-y-2 text-muted-foreground max-w-2xl mx-auto">
+                        <p>✓ Personalized for your specific festival experience</p>
+                        <p>✓ Expert tips from seasoned festival-goers</p>
+                        <p>✓ Optimized for your camping and comfort preferences</p>
+                        <p>✓ Printable PDF format for easy use</p>
+                    </div>
                 </div>
+
+                {/* First Ad Slot */}
+                <AdSlot 
+                    adSlot="1234567890"
+                    className="brutal-border p-4 bg-white dark:bg-black mb-8"
+                />
                 
                 <Card className="max-w-2xl mx-auto p-6 bg-[#FFD600]/5 brutal-border border-[#FFD600]">
                     <div className="mb-6 brutal-border p-4">
@@ -156,6 +174,7 @@ function ChecklistForm() {
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
+                        {/* Existing form fields */}
                         <div className="space-y-4">
                             <div className="flex items-center gap-2">
                                 <Tent className="h-5 w-5 text-[#FFD600]" />
@@ -181,6 +200,13 @@ function ChecklistForm() {
                             </RadioGroup>
                         </div>
 
+                        {/* Second Ad Slot */}
+                        <AdSlot 
+                            adSlot="0987654321"
+                            className="brutal-border p-4 bg-white dark:bg-black my-8"
+                        />
+
+                        {/* Remaining form fields */}
                         <div className="space-y-4">
                             <div className="flex items-center gap-2">
                                 <Calendar className="h-5 w-5 text-[#FFD600]" />
@@ -255,6 +281,35 @@ function ChecklistForm() {
                         )}
                     </form>
                 </Card>
+
+                {/* Third Ad Slot */}
+                <AdSlot 
+                    adSlot="5432109876"
+                    className="brutal-border p-4 bg-white dark:bg-black my-8"
+                />
+                
+                {/* Additional Value Content */}
+                <div className="max-w-2xl mx-auto mt-12">
+                    <h3 className="text-2xl font-semibold mb-4 text-center">Why Use Our Festival Checklist?</h3>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <Card className="p-4 brutal-border">
+                            <h4 className="font-bold mb-2">Expert-Curated Lists</h4>
+                            <p>Our checklists are crafted by festival veterans who know exactly what you need for the best experience.</p>
+                        </Card>
+                        <Card className="p-4 brutal-border">
+                            <h4 className="font-bold mb-2">Personalized for You</h4>
+                            <p>Get a customized list based on your specific needs, whether you&apos;re camping or doing a day trip.</p>
+                        </Card>
+                        <Card className="p-4 brutal-border">
+                            <h4 className="font-bold mb-2">Never Forget Essentials</h4>
+                            <p>From obvious must-haves to easily forgotten items, we&apos;ve got you covered with a comprehensive list.</p>
+                        </Card>
+                        <Card className="p-4 brutal-border">
+                            <h4 className="font-bold mb-2">Budget-Conscious Options</h4>
+                            <p>Choose between budget-friendly essentials or premium comfort items based on your preferences.</p>
+                        </Card>
+                    </div>
+                </div>
                 
                 <div className="text-center mt-8 mb-14">
                     <Button 
@@ -273,7 +328,6 @@ export default function ChecklistPage() {
     const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
     
     if (!siteKey) {
-        console.error('Missing NEXT_PUBLIC_RECAPTCHA_SITE_KEY environment variable');
         return (
             <div className="container mx-auto px-4 py-8">
                 <Card className="max-w-2xl mx-auto p-6 text-center">
